@@ -10,7 +10,7 @@ export default function Home() {
         <div className={styles.main_container}>
           <h1 className={styles.title}>Bienvenue les watchers</h1>
           <p className={styles.text}>
-            Ici vous pourrez parcourir un catalogue de films et séries mit à
+            Ici vous pourrez parcourir un catalogue de films et séries mis à
             jour réguilèrement.
           </p>
           <p className={styles.text}>
@@ -18,6 +18,7 @@ export default function Home() {
             listes pour avoir un suivi continu sur votre avancement de
             visionnage.
           </p>
+          <p className={styles.text}>Pas mal nan ? En plus c'est gratuit !</p>
           <p className={styles.text}>
             Il vous suffit de vous connectez ou de créer un compte en cliquant
             sur le lien ci-dessous.
