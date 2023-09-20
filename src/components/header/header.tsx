@@ -6,13 +6,13 @@ export default function Header() {
       <h1 className={styles.title}>Watch list</h1>
       <nav className={styles.nav}>
         <a className={styles.link} href="#">
-          Home
+          Accueil
         </a>
         <a className={styles.link} href="#">
-          About
+          Mes listes
         </a>
         <a className={styles.link} href="#">
-          Contact
+          Mon profil
         </a>
       </nav>
       <div className={styles.search_container}>
