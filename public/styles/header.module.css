@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Skranji&display=swap");
+
 .header {
   background-color: #3d3d3d;
   width: 100wh;
@@ -7,6 +9,7 @@
 }
 
 .title {
+  font-family: "Skranji", cursive;
   color: #ffffff;
   text-transform: uppercase;
   margin-left: 20px;
