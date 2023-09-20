@@ -8,32 +8,80 @@ export default function Connexion() {
       <Header />
       <div className={styles.connexion_container}>
         <form className={styles.form_signin}>
-          <div>
-            <label htmlFor="email">Adresse e-mail</label>
-            <input type="email" id="email" name="email" required />
+          <div className={styles.input_container}>
+            <label className={styles.label} htmlFor="email">
+              Adresse e-mail
+            </label>
+            <input
+              className={styles.input}
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required />
+          <div className={styles.input_container}>
+            <label className={styles.label} htmlFor="password">
+              Mot de passe
+            </label>
+            <input
+              className={styles.input}
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
           </div>
           <button type="submit">Se connecter</button>
         </form>
         <form className={styles.form_signup}>
-          <div>
-            <label htmlFor="firstname">Prénom</label>
-            <input type="text" id="firstname" name="firstname" required />
+          <div className={styles.input_container}>
+            <label className={styles.label} htmlFor="firstname">
+              Prénom
+            </label>
+            <input
+              className={styles.input}
+              type="text"
+              id="firstname"
+              name="firstname"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor="lastname">Nom</label>
-            <input type="text" id="lastname" name="lastname" required />
+          <div className={styles.input_container}>
+            <label className={styles.label} htmlFor="lastname">
+              Nom
+            </label>
+            <input
+              className={styles.input}
+              type="text"
+              id="lastname"
+              name="lastname"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor="email">Adresse e-mail</label>
-            <input type="email" id="email" name="email" required />
+          <div className={styles.input_container}>
+            <label className={styles.label} htmlFor="email">
+              Adresse e-mail
+            </label>
+            <input
+              className={styles.input}
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
           </div>
-          <div>
-            <label htmlFor="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required />
+          <div className={styles.input_container}>
+            <label className={styles.label} htmlFor="password">
+              Mot de passe
+            </label>
+            <input
+              className={styles.input}
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
           </div>
           <button type="submit">S'inscrire</button>
         </form>
