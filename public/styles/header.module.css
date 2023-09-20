@@ -26,11 +26,13 @@
   color: #ffffff;
   text-transform: uppercase;
   text-decoration: none;
+  font-size: 20px;
   margin: 0 20px;
 }
 
 .link:hover {
   color: #74ff00;
+  cursor: pointer;
 }
 
 .search_container {
@@ -39,6 +41,22 @@
   justify-content: flex-end;
 }
 
+.search_box {
+  padding: 10px 5px;
+  border-radius: 5px;
+  border: 1px solid #74ff00;
+}
+
 .search_button {
   margin-right: 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #74ff00;
+  color: #3d3d3d;
+}
+
+.search_button:hover {
+  background-color: #51b100;
+  cursor: pointer;
 }
