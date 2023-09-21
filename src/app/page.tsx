@@ -22,7 +22,7 @@ export default function Home() {
   const contactsData = async () => {
     axios
       .get(
-        "https://api.themoviedb.org/3/account/20459107/rated/movies",
+        "https://api.themoviedb.org/3/account/20459107/rated/movies?language=en-US&page=1&sort_by=created_at.asc",
         options
       )
       .then((response) => {
@@ -49,24 +49,32 @@ export default function Home() {
             jour réguilèrement.
           </p>
           <p className={styles.text}>
-            Vous avez la possibilité d'ajouter des films et séries parmis des
-            listes pour avoir un suivi continu sur votre avancement de
+            Vous avez la possibilité d&apos;ajouter des films et séries parmis
+            des listes pour avoir un suivi continu sur votre avancement de
             visionnage.
           </p>
-          <p className={styles.text}>Pas mal nan ? En plus c'est gratuit !</p>
+          <p className={styles.text}>
+            Pas mal nan ? En plus c&apos;est gratuit !
+          </p>
           <p className={styles.text}>
             Il vous suffit de vous connectez ou de créer un compte en cliquant
             sur le lien ci-dessous.
           </p>
           <button className={styles.btn}>
             <a className={styles.link_btn} href="/connexion">
-              S'inscrire / Se connecter
+              S&apos;inscrire / Se connecter
             </a>
           </button>
         </div>
         <div className={styles.catalogue_container}>
           <div className={styles.item_card}>
-            <Image className={styles.item_img} src="" alt="" />
+            <Image
+              className={styles.item_img}
+              src="/public/assets/images"
+              alt="Photo de couverture d'un film ou série"
+              width={200}
+              height={300}
+            />
             <h2 className={styles.item_title}>Titre</h2>
           </div>
         </div>
