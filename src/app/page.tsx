@@ -29,6 +29,7 @@ export default function Home() {
             </a>
           </button>
         </div>
+        <div className={styles.catalogue_container}></div>
       </main>
       <Footer />
     </>
