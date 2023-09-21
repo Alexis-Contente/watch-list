@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -29,7 +30,12 @@ export default function Home() {
             </a>
           </button>
         </div>
-        <div className={styles.catalogue_container}></div>
+        <div className={styles.catalogue_container}>
+          <div className={styles.item_card}>
+            <Image className={styles.item_img} src="" alt="" />
+            <h2 className={styles.item_title}>Titre</h2>
+          </div>
+        </div>
       </main>
       <Footer />
     </>
