@@ -23,7 +23,11 @@ export default function Home() {
             Il vous suffit de vous connectez ou de créer un compte en cliquant
             sur le lien ci-dessous.
           </p>
-          <button className={styles.btn}>S'inscrire / Se connecter</button>
+          <button className={styles.btn}>
+            <a className={styles.link_btn} href="/connexion">
+              S'inscrire / Se connecter
+            </a>
+          </button>
         </div>
       </main>
       <Footer />
