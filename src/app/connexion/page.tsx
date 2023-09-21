@@ -32,7 +32,9 @@ export default function Connexion() {
               required
             />
           </div>
-          <button type="submit">Se connecter</button>
+          <button className={styles.btn} type="submit">
+            Se connecter
+          </button>
         </form>
         <form className={styles.form_signup}>
           <div className={styles.input_container}>
@@ -83,7 +85,9 @@ export default function Connexion() {
               required
             />
           </div>
-          <button type="submit">S'inscrire</button>
+          <button className={styles.btn} type="submit">
+            S'inscrire
+          </button>
         </form>
       </div>
       <Footer />

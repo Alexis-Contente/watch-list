@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .label {
@@ -20,6 +21,7 @@
 }
 
 .input_container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,13 +30,31 @@
 }
 
 .input {
+  width: 100%;
   border: none;
   border-left: 3px solid #3d3d3d;
   border-bottom: 2px solid #3d3d3d;
   background-color: #696969;
   color: #ffffff;
+  margin-top: 5px;
 }
 
 .input:focus {
   outline: none;
+}
+
+.btn {
+  width: 50%;
+  height: 3rem;
+  background-color: #74ff00;
+  border: none;
+  border-radius: 30px;
+  margin-top: 1rem;
+  color: #3d3d3d;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background-color: #51b100;
+  cursor: pointer;
 }
