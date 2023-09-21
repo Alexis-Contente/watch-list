@@ -1,9 +1,43 @@
+"use client";
+
 import styles from "./page.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [ratedMovies, setRatedMovies] = useState([]);
+
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTliY2M4ZjgwYThjNWM0MmUwMmY4ZDc0Mzg1NzM5MyIsInN1YiI6IjY1MDgyNDg0M2NkMTJjMDBjYTU2NjA0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6JoagrEoOFINgAbx0j_MuIUzwHKWS6GwbWemJxu-hNY",
+    },
+  };
+
+  const contactsData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/account/20459107/rated/movies",
+        options
+      )
+      .then((response) => {
+        setRatedMovies(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    contactsData();
+  }, []);
+
   return (
     <>
       <Header />

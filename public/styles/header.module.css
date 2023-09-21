@@ -6,6 +6,7 @@
   height: 100px;
   display: flex;
   align-items: center;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .title {
@@ -44,7 +45,11 @@
 .search_box {
   padding: 10px 5px;
   border-radius: 5px;
-  border: 1px solid #74ff00;
+  border: 2px solid #74ff00;
+}
+
+.search_box:focus {
+  outline: none;
 }
 
 .search_button {
