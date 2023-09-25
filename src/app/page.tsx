@@ -48,19 +48,20 @@ export default function Home(props: Item) {
   const [upcomingMovies, setUpcomingMovies] = useState<Item[] | null>(null);
   const [onTheAirTvShow, setOnTheAirTvShow] = useState<Item[] | null>(null);
 
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     accept: "application/json",
-  //     Authorization:
-  //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTliY2M4ZjgwYThjNWM0MmUwMmY4ZDc0Mzg1NzM5MyIsInN1YiI6IjY1MDgyNDg0M2NkMTJjMDBjYTU2NjA0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6JoagrEoOFINgAbx0j_MuIUzwHKWS6GwbWemJxu-hNY",
-  //   },
-  // };
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTliY2M4ZjgwYThjNWM0MmUwMmY4ZDc0Mzg1NzM5MyIsInN1YiI6IjY1MDgyNDg0M2NkMTJjMDBjYTU2NjA0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6JoagrEoOFINgAbx0j_MuIUzwHKWS6GwbWemJxu-hNY",
+    },
+  };
 
-  const popularMovieData = async () => {
+  const popularMoviesData = async () => {
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR" //, options
+        "https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
       )
       .then((response) => {
         setPopularMovies(response.data.results);
@@ -71,8 +72,24 @@ export default function Home(props: Item) {
       });
   };
 
+  const ratedMoviesData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
+      )
+      .then((response) => {
+        setRatedMovies(response.data.results);
+        console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   useEffect(() => {
-    popularMovieData();
+    popularMoviesData();
+    ratedMoviesData();
   }, []);
 
   return (
@@ -106,6 +123,21 @@ export default function Home(props: Item) {
         <div className={styles.catalogue_container}>
           {popularMovies &&
             popularMovies.map((movie) => (
+              <div className={styles.item_card} key={movie.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{movie.title}</h2>
+              </div>
+            ))}
+        </div>
+        <div className={styles.catalogue_container}>
+          {ratedMovies &&
+            ratedMovies.map((movie) => (
               <div className={styles.item_card} key={movie.id}>
                 <Image
                   className={styles.item_img}
