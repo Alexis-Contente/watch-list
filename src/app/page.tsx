@@ -6,11 +6,14 @@ import Header from "@/components/header/header";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 // Type de données attendu pour les films et séries
 type Item = {
   id: number;
   title: string;
+  name: string;
   overview: string;
   poster_path: string;
   backdrop_path: string;
@@ -24,6 +27,7 @@ export default function Home(props: Item) {
   const {
     id,
     title,
+    name,
     overview,
     poster_path,
     backdrop_path,
@@ -80,7 +84,82 @@ export default function Home(props: Item) {
       )
       .then((response) => {
         setRatedMovies(response.data.results);
-        console.log(response.data.results);
+        // console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const popularTvShowData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/tv/popular?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
+      )
+      .then((response) => {
+        setPopularTvShow(response.data.results);
+        // console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const ratedTvShowData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/tv/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
+      )
+      .then((response) => {
+        setRatedTvShow(response.data.results);
+        // console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const nowPlayingMoviesData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
+      )
+      .then((response) => {
+        setNowPlayingMovies(response.data.results);
+        // console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const upcomingMoviesData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
+      )
+      .then((response) => {
+        setUpcomingMovies(response.data.results);
+        // console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const onTheAirTvShowData = async () => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/tv/on_the_air?api_key=${TMDB_API_KEY}&language=fr-FR",
+        options
+      )
+      .then((response) => {
+        setOnTheAirTvShow(response.data.results);
+        // console.log(response.data.results);
       })
       .catch((error) => {
         console.error(error);
@@ -90,7 +169,32 @@ export default function Home(props: Item) {
   useEffect(() => {
     popularMoviesData();
     ratedMoviesData();
+    nowPlayingMoviesData();
+    upcomingMoviesData();
+    popularTvShowData();
+    ratedTvShowData();
+    onTheAirTvShowData();
   }, []);
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 8,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1200, min: 464 },
+      items: 3,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
+  console.log(popularMovies);
 
   return (
     <>
@@ -147,6 +251,81 @@ export default function Home(props: Item) {
                   height={300}
                 />
                 <h2 className={styles.item_title}>{movie.title}</h2>
+              </div>
+            ))}
+        </div>
+        <div className={styles.catalogue_container}>
+          {nowPlayingMovies &&
+            nowPlayingMovies.map((movie) => (
+              <div className={styles.item_card} key={movie.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{movie.title}</h2>
+              </div>
+            ))}
+        </div>
+        <div className={styles.catalogue_container}>
+          {upcomingMovies &&
+            upcomingMovies.map((movie) => (
+              <div className={styles.item_card} key={movie.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{movie.title}</h2>
+              </div>
+            ))}
+        </div>
+        <div className={styles.catalogue_container}>
+          {popularTvShow &&
+            popularTvShow.map((tvShow) => (
+              <div className={styles.item_card} key={tvShow.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{tvShow.name}</h2>
+              </div>
+            ))}
+        </div>
+        <div className={styles.catalogue_container}>
+          {ratedTvShow &&
+            ratedTvShow.map((tvShow) => (
+              <div className={styles.item_card} key={tvShow.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{tvShow.name}</h2>
+              </div>
+            ))}
+        </div>
+        <div className={styles.catalogue_container}>
+          {onTheAirTvShow &&
+            onTheAirTvShow.map((tvShow) => (
+              <div className={styles.item_card} key={tvShow.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{tvShow.name}</h2>
               </div>
             ))}
         </div>
