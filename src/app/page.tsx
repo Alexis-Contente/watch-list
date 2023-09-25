@@ -3,6 +3,7 @@
 import styles from "./page.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -43,15 +44,6 @@ export default function Home(props: Item) {
   // Récupération de l'url de l'API
   const TMDB_API_URL = "https://api.themoviedb.org/3/";
 
-  // Récupération des films et séries par catéforie
-  const [popularMovies, setPopularMovies] = useState<Item[] | null>(null);
-  const [ratedMovies, setRatedMovies] = useState<Item[] | null>(null);
-  const [popularTvShow, setPopularTvShow] = useState<Item[] | null>(null);
-  const [ratedTvShow, setRatedTvShow] = useState<Item[] | null>(null);
-  const [nowPlayingMovies, setNowPlayingMovies] = useState<Item[] | null>(null);
-  const [upcomingMovies, setUpcomingMovies] = useState<Item[] | null>(null);
-  const [onTheAirTvShow, setOnTheAirTvShow] = useState<Item[] | null>(null);
-
   const options = {
     method: "GET",
     headers: {
@@ -61,120 +53,112 @@ export default function Home(props: Item) {
     },
   };
 
-  const popularMoviesData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setPopularMovies(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: popularMovies,
+    isLoading: isLoading1,
+    isError: isError1,
+  } = useQuery({
+    queryKey: ["popularMovies"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  const ratedMoviesData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setRatedMovies(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: ratedMovies,
+    isLoading: isLoading2,
+    isError: isError2,
+  } = useQuery({
+    queryKey: ["ratedMovies"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  const popularTvShowData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/tv/popular?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setPopularTvShow(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: popularTvShow,
+    isLoading: isLoading3,
+    isError: isError3,
+  } = useQuery({
+    queryKey: ["popularTvShow"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/tv/popular?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  const ratedTvShowData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/tv/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setRatedTvShow(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: ratedTvShow,
+    isLoading: isLoading4,
+    isError: isError4,
+  } = useQuery({
+    queryKey: ["ratedTvShow"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/tv/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  const nowPlayingMoviesData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setNowPlayingMovies(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: nowPlayingMovies,
+    isLoading: isLoading5,
+    isError: isError5,
+  } = useQuery({
+    queryKey: ["nowPlayingMovies"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  const upcomingMoviesData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setUpcomingMovies(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: upcomingMovies,
+    isLoading: isLoading6,
+    isError: isError6,
+  } = useQuery({
+    queryKey: ["upcomingMovies"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  const onTheAirTvShowData = async () => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/tv/on_the_air?api_key=${TMDB_API_KEY}&language=fr-FR",
-        options
-      )
-      .then((response) => {
-        setOnTheAirTvShow(response.data.results);
-        // console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const {
+    data: onTheAirTvShow,
+    isLoading: isLoading7,
+    isError: isError7,
+  } = useQuery({
+    queryKey: ["onTheAirTvShow"],
+    queryFn: () =>
+      axios
+        .get(
+          "https://api.themoviedb.org/3/tv/on_the_air?api_key=${TMDB_API_KEY}&language=fr-FR",
+          options
+        )
+        .then((response) => response.data.results as Item[]),
+  });
 
-  useEffect(() => {
-    popularMoviesData();
-    ratedMoviesData();
-    nowPlayingMoviesData();
-    upcomingMoviesData();
-    popularTvShowData();
-    ratedTvShowData();
-    onTheAirTvShowData();
-  }, []);
+  // console.log("data", data);
 
   const responsive = {
     desktop: {
@@ -194,11 +178,10 @@ export default function Home(props: Item) {
     },
   };
 
-  console.log(popularMovies);
-
   return (
     <>
       <Header />
+
       <main className={styles.main}>
         <div className={styles.main_container}>
           <h1 className={styles.title}>Bienvenue les watchers</h1>
@@ -224,110 +207,217 @@ export default function Home(props: Item) {
             </a>
           </button>
         </div>
+
         <div className={styles.catalogue_container}>
-          {popularMovies &&
-            popularMovies.map((movie) => (
-              <div className={styles.item_card} key={movie.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{movie.title}</h2>
-              </div>
-            ))}
-        </div>
-        <div className={styles.catalogue_container}>
-          {ratedMovies &&
-            ratedMovies.map((movie) => (
-              <div className={styles.item_card} key={movie.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{movie.title}</h2>
-              </div>
-            ))}
-        </div>
-        <div className={styles.catalogue_container}>
-          {nowPlayingMovies &&
-            nowPlayingMovies.map((movie) => (
-              <div className={styles.item_card} key={movie.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{movie.title}</h2>
-              </div>
-            ))}
-        </div>
-        <div className={styles.catalogue_container}>
-          {upcomingMovies &&
-            upcomingMovies.map((movie) => (
-              <div className={styles.item_card} key={movie.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{movie.title}</h2>
-              </div>
-            ))}
-        </div>
-        <div className={styles.catalogue_container}>
-          {popularTvShow &&
-            popularTvShow.map((tvShow) => (
-              <div className={styles.item_card} key={tvShow.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{tvShow.name}</h2>
-              </div>
-            ))}
-        </div>
-        <div className={styles.catalogue_container}>
-          {ratedTvShow &&
-            ratedTvShow.map((tvShow) => (
-              <div className={styles.item_card} key={tvShow.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{tvShow.name}</h2>
-              </div>
-            ))}
-        </div>
-        <div className={styles.catalogue_container}>
-          {onTheAirTvShow &&
-            onTheAirTvShow.map((tvShow) => (
-              <div className={styles.item_card} key={tvShow.id}>
-                <Image
-                  className={styles.item_img}
-                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                  alt="Photo de couverture d'un film ou série"
-                  width={200}
-                  height={300}
-                />
-                <h2 className={styles.item_title}>{tvShow.name}</h2>
-              </div>
-            ))}
+          <div className={styles.categorie_container}>
+            {isLoading1 && <p>Chargement...</p>}
+            {popularMovies && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {popularMovies.map((movie) => (
+                  <div className={styles.item_card} key={movie.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{movie.title}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            {isLoading2 && <p>Chargement...</p>}
+            {ratedMovies && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {ratedMovies.map((movie) => (
+                  <div className={styles.item_card} key={movie.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{movie.title}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            {isLoading3 && <p>Chargement...</p>}
+            {popularTvShow && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {popularTvShow.map((tvShow) => (
+                  <div className={styles.item_card} key={tvShow.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            {isLoading4 && <p>Chargement...</p>}
+            {ratedTvShow && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {ratedTvShow.map((tvShow) => (
+                  <div className={styles.item_card} key={tvShow.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            {isLoading5 && <p>Chargement...</p>}
+            {nowPlayingMovies && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {nowPlayingMovies.map((movie) => (
+                  <div className={styles.item_card} key={movie.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{movie.title}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            {isLoading6 && <p>Chargement...</p>}
+            {upcomingMovies && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {upcomingMovies.map((movie) => (
+                  <div className={styles.item_card} key={movie.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{movie.title}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            {isLoading7 && <p>Chargement...</p>}
+            {onTheAirTvShow && (
+              <Carousel
+                className="sm:pb-3"
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {onTheAirTvShow.map((tvShow) => (
+                  <div className={styles.item_card} key={tvShow.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                  </div>
+                ))}
+              </Carousel>
+            )}
+          </div>
         </div>
       </main>
       <Footer />

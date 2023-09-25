@@ -49,5 +49,12 @@
 }
 
 .catalogue_container {
-  display: flex;
+  width: 100%;
+  margin: 120px 0;
+}
+
+.categorie_container {
+  width: 100%;
+  margin: 100px 15px;
+  background-color: #ffffff;
 }
