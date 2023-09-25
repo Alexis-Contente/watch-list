@@ -7,27 +7,64 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [ratedMovies, setRatedMovies] = useState([]);
+// Type de données attendu pour les films et séries
+type Item = {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  genre_ids: number[];
+};
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTliY2M4ZjgwYThjNWM0MmUwMmY4ZDc0Mzg1NzM5MyIsInN1YiI6IjY1MDgyNDg0M2NkMTJjMDBjYTU2NjA0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6JoagrEoOFINgAbx0j_MuIUzwHKWS6GwbWemJxu-hNY",
-    },
-  };
+export default function Home(props: Item) {
+  const {
+    id,
+    title,
+    overview,
+    poster_path,
+    backdrop_path,
+    release_date,
+    vote_average,
+    vote_count,
+    genre_ids,
+  } = props;
 
-  const contactsData = async () => {
+  // Récupération de la clé API
+  const TMDB_API_KEY = process.env.API_KEY_TMDB;
+
+  // Récupération de l'url de l'API
+  const TMDB_API_URL = "https://api.themoviedb.org/3/";
+
+  // Récupération des films et séries par catéforie
+  const [popularMovies, setPopularMovies] = useState<Item[] | null>(null);
+  const [ratedMovies, setRatedMovies] = useState<Item[] | null>(null);
+  const [popularTvShow, setPopularTvShow] = useState<Item[] | null>(null);
+  const [ratedTvShow, setRatedTvShow] = useState<Item[] | null>(null);
+  const [nowPlayingMovies, setNowPlayingMovies] = useState<Item[] | null>(null);
+  const [upcomingMovies, setUpcomingMovies] = useState<Item[] | null>(null);
+  const [onTheAirTvShow, setOnTheAirTvShow] = useState<Item[] | null>(null);
+
+  // const options = {
+  //   method: "GET",
+  //   headers: {
+  //     accept: "application/json",
+  //     Authorization:
+  //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTliY2M4ZjgwYThjNWM0MmUwMmY4ZDc0Mzg1NzM5MyIsInN1YiI6IjY1MDgyNDg0M2NkMTJjMDBjYTU2NjA0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6JoagrEoOFINgAbx0j_MuIUzwHKWS6GwbWemJxu-hNY",
+  //   },
+  // };
+
+  const popularMovieData = async () => {
     axios
       .get(
-        "https://api.themoviedb.org/3/account/20459107/rated/movies?language=en-US&page=1&sort_by=created_at.asc",
-        options
+        "https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR" //, options
       )
       .then((response) => {
-        setRatedMovies(response.data);
-        console.log(response.data);
+        setPopularMovies(response.data.results);
+        // console.log(response.data.results);
       })
       .catch((error) => {
         console.error(error);
@@ -35,7 +72,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    contactsData();
+    popularMovieData();
   }, []);
 
   return (
@@ -67,16 +104,19 @@ export default function Home() {
           </button>
         </div>
         <div className={styles.catalogue_container}>
-          <div className={styles.item_card}>
-            <Image
-              className={styles.item_img}
-              src="/public/assets/images"
-              alt="Photo de couverture d'un film ou série"
-              width={200}
-              height={300}
-            />
-            <h2 className={styles.item_title}>Titre</h2>
-          </div>
+          {popularMovies &&
+            popularMovies.map((movie) => (
+              <div className={styles.item_card} key={movie.id}>
+                <Image
+                  className={styles.item_img}
+                  src="/public/assets/images"
+                  alt="Photo de couverture d'un film ou série"
+                  width={200}
+                  height={300}
+                />
+                <h2 className={styles.item_title}>{movie.title}</h2>
+              </div>
+            ))}
         </div>
       </main>
       <Footer />
