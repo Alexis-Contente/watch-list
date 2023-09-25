@@ -230,7 +230,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={movie.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
@@ -245,7 +245,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={movie.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
@@ -260,7 +260,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={movie.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
@@ -275,7 +275,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={movie.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
@@ -290,7 +290,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={tvShow.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
@@ -305,7 +305,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={tvShow.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
@@ -320,7 +320,7 @@ export default function Home(props: Item) {
               <div className={styles.item_card} key={tvShow.id}>
                 <Image
                   className={styles.item_img}
-                  src="/public/assets/images"
+                  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
                   alt="Photo de couverture d'un film ou série"
                   width={200}
                   height={300}
