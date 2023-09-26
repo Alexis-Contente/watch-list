@@ -86,7 +86,7 @@ export default function Connexion() {
             />
           </div>
           <button className={styles.btn} type="submit">
-            S'inscrire
+            S&apos;inscrire
           </button>
         </form>
       </div>

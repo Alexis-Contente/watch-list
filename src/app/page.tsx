@@ -6,7 +6,7 @@ import Header from "@/components/header/header";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -210,6 +210,7 @@ export default function Home(props: Item) {
 
         <div className={styles.catalogue_container}>
           <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Films populaires</h2>
             {isLoading1 && <p>Chargement...</p>}
             {popularMovies && (
               <Carousel
@@ -224,7 +225,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {popularMovies.map((movie) => (
-                  <div className={styles.item_card} key={movie.id}>
+                  <Link href="#" className={styles.item_card} key={movie.id}>
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
@@ -233,13 +234,14 @@ export default function Home(props: Item) {
                       height={300}
                     />
                     <h2 className={styles.item_title}>{movie.title}</h2>
-                  </div>
+                  </Link>
                 ))}
               </Carousel>
             )}
           </div>
 
           <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Films les mieux notés</h2>
             {isLoading2 && <p>Chargement...</p>}
             {ratedMovies && (
               <Carousel
@@ -254,7 +256,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {ratedMovies.map((movie) => (
-                  <div className={styles.item_card} key={movie.id}>
+                  <Link href="#" className={styles.item_card} key={movie.id}>
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
@@ -263,73 +265,14 @@ export default function Home(props: Item) {
                       height={300}
                     />
                     <h2 className={styles.item_title}>{movie.title}</h2>
-                  </div>
+                  </Link>
                 ))}
               </Carousel>
             )}
           </div>
 
           <div className={styles.categorie_container}>
-            {isLoading3 && <p>Chargement...</p>}
-            {popularTvShow && (
-              <Carousel
-                className={styles.carousel}
-                responsive={responsive}
-                swipeable={true}
-                draggable={false}
-                showDots={true}
-                infinite={true}
-                partialVisible={false}
-                dotListClass="invisible sm:visible custom-dot-list-style"
-                ssr={true}
-              >
-                {popularTvShow.map((tvShow) => (
-                  <div className={styles.item_card} key={tvShow.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{tvShow.name}</h2>
-                  </div>
-                ))}
-              </Carousel>
-            )}
-          </div>
-
-          <div className={styles.categorie_container}>
-            {isLoading4 && <p>Chargement...</p>}
-            {ratedTvShow && (
-              <Carousel
-                className={styles.carousel}
-                responsive={responsive}
-                swipeable={true}
-                draggable={false}
-                showDots={true}
-                infinite={true}
-                partialVisible={false}
-                dotListClass="invisible sm:visible custom-dot-list-style"
-                ssr={true}
-              >
-                {ratedTvShow.map((tvShow) => (
-                  <div className={styles.item_card} key={tvShow.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{tvShow.name}</h2>
-                  </div>
-                ))}
-              </Carousel>
-            )}
-          </div>
-
-          <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Films au cinéma</h2>
             {isLoading5 && <p>Chargement...</p>}
             {nowPlayingMovies && (
               <Carousel
@@ -344,7 +287,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {nowPlayingMovies.map((movie) => (
-                  <div className={styles.item_card} key={movie.id}>
+                  <Link href="#" className={styles.item_card} key={movie.id}>
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
@@ -353,13 +296,14 @@ export default function Home(props: Item) {
                       height={300}
                     />
                     <h2 className={styles.item_title}>{movie.title}</h2>
-                  </div>
+                  </Link>
                 ))}
               </Carousel>
             )}
           </div>
 
           <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Films à venir</h2>
             {isLoading6 && <p>Chargement...</p>}
             {upcomingMovies && (
               <Carousel
@@ -374,7 +318,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {upcomingMovies.map((movie) => (
-                  <div className={styles.item_card} key={movie.id}>
+                  <Link href="#" className={styles.item_card} key={movie.id}>
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
@@ -383,13 +327,76 @@ export default function Home(props: Item) {
                       height={300}
                     />
                     <h2 className={styles.item_title}>{movie.title}</h2>
-                  </div>
+                  </Link>
                 ))}
               </Carousel>
             )}
           </div>
 
           <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Séries populaires</h2>
+            {isLoading3 && <p>Chargement...</p>}
+            {popularTvShow && (
+              <Carousel
+                className={styles.carousel}
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {popularTvShow.map((tvShow) => (
+                  <Link href="#" className={styles.item_card} key={tvShow.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                  </Link>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Séries les mieux notées</h2>
+            {isLoading4 && <p>Chargement...</p>}
+            {ratedTvShow && (
+              <Carousel
+                className={styles.carousel}
+                responsive={responsive}
+                swipeable={true}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+                partialVisible={false}
+                dotListClass="invisible sm:visible custom-dot-list-style"
+                ssr={true}
+              >
+                {ratedTvShow.map((tvShow) => (
+                  <Link href="#" className={styles.item_card} key={tvShow.id}>
+                    <Image
+                      className={styles.item_img}
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                      alt="Photo de couverture d'un film ou série"
+                      width={200}
+                      height={300}
+                    />
+                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                  </Link>
+                ))}
+              </Carousel>
+            )}
+          </div>
+
+          <div className={styles.categorie_container}>
+            <h2 className={styles.title_categorie}>Séries en diffusion</h2>
             {isLoading7 && <p>Chargement...</p>}
             {onTheAirTvShow && (
               <Carousel
@@ -404,7 +411,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {onTheAirTvShow.map((tvShow) => (
-                  <div className={styles.item_card} key={tvShow.id}>
+                  <Link href="#" className={styles.item_card} key={tvShow.id}>
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
@@ -413,7 +420,7 @@ export default function Home(props: Item) {
                       height={300}
                     />
                     <h2 className={styles.item_title}>{tvShow.name}</h2>
-                  </div>
+                  </Link>
                 ))}
               </Carousel>
             )}

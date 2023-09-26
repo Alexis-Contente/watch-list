@@ -58,12 +58,29 @@
   margin: 100px 15px;
 }
 
+.title_categorie {
+  width: 100%;
+  margin: 20px 0;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 .carousel {
   margin: 0 auto;
 }
 
 .item_card {
   width: 200px;
+  margin: 0 15px;
+  text-decoration: none;
+  color: #000000;
+  transition: transform 0.3s ease;
+}
+
+.item_card:hover {
+  transform: scale(1.8);
 }
 
 .item_img {
