@@ -225,7 +225,11 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {popularMovies.map((movie) => (
-                  <Link href="#" className={styles.item_card} key={movie.id}>
+                  <Link
+                    href={`/description/${movie.id}`}
+                    className={styles.item_card}
+                    key={movie.id}
+                  >
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}

@@ -1,0 +1,16 @@
+.description_container {
+  border: 2px solid #ffffff;
+  margin: 130px 200px;
+  display: flex;
+}
+
+.image {
+  padding: 0;
+  margin: 50px;
+  width: 30%;
+}
+
+.informations {
+  width: 70%;
+  margin: 50px;
+}
