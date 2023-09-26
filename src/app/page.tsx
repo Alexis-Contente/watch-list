@@ -213,7 +213,7 @@ export default function Home(props: Item) {
             {isLoading1 && <p>Chargement...</p>}
             {popularMovies && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}
@@ -243,7 +243,7 @@ export default function Home(props: Item) {
             {isLoading2 && <p>Chargement...</p>}
             {ratedMovies && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}
@@ -273,7 +273,7 @@ export default function Home(props: Item) {
             {isLoading3 && <p>Chargement...</p>}
             {popularTvShow && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}
@@ -303,7 +303,7 @@ export default function Home(props: Item) {
             {isLoading4 && <p>Chargement...</p>}
             {ratedTvShow && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}
@@ -333,7 +333,7 @@ export default function Home(props: Item) {
             {isLoading5 && <p>Chargement...</p>}
             {nowPlayingMovies && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}
@@ -363,7 +363,7 @@ export default function Home(props: Item) {
             {isLoading6 && <p>Chargement...</p>}
             {upcomingMovies && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}
@@ -393,7 +393,7 @@ export default function Home(props: Item) {
             {isLoading7 && <p>Chargement...</p>}
             {onTheAirTvShow && (
               <Carousel
-                className="sm:pb-3"
+                className={styles.carousel}
                 responsive={responsive}
                 swipeable={true}
                 draggable={false}

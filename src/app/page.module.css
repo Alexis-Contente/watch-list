@@ -56,5 +56,23 @@
 .categorie_container {
   width: 100%;
   margin: 100px 15px;
-  background-color: #ffffff;
+}
+
+.carousel {
+  margin: 0 auto;
+}
+
+.item_card {
+  width: 200px;
+}
+
+.item_img {
+  border-radius: 10px;
+}
+
+.item_title {
+  font-size: 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
