@@ -19,6 +19,7 @@ export default function Header() {
   // Récupération de l'url de l'API
   const TMDB_API_URL = "https://api.themoviedb.org/3/";
 
+  // Jeton d'authentification
   const options = {
     method: "GET",
     headers: {
@@ -28,6 +29,7 @@ export default function Header() {
     },
   };
 
+  // Gestion de la barre de recherche
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -47,8 +49,9 @@ export default function Header() {
     const query = e.target.value;
     setSearchTerm(query);
     const results = await searchItem(query);
-    setSearchResults(results); // Mettez à jour l'état avec les résultats de la recherche
+    setSearchResults(results);
   };
+
   return (
     <div className={styles.header}>
       <h1 className={styles.title}>Watch list</h1>
@@ -92,7 +95,6 @@ export default function Header() {
             }) => (
               <div key={result.id}>
                 <h3>{result.title}</h3>
-                {/* Afficher d'autres détails si nécessaire */}
               </div>
             )
           )}
