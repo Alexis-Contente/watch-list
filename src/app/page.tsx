@@ -181,6 +181,7 @@ export default function Home(props: Item) {
     },
   };
 
+  // AFFICHAGE DU MODAL
   const [selectedMovie, setSelectedMovie] = useState<Item | null>(null);
 
   const handleOpenModal = (movie: Item) => {
@@ -190,6 +191,8 @@ export default function Home(props: Item) {
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
+
+  // GESTION DE LA SEARCH BAR
 
   return (
     <>
