@@ -3,10 +3,12 @@
 import styles from "./page.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import MovieModal from "@/components/modal/movieModal";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -67,6 +69,7 @@ export default function Home(props: Item) {
         )
         .then((response) => response.data.results as Item[]),
   });
+  console.log("popularMovies", popularMovies);
 
   const {
     data: ratedMovies,
@@ -163,7 +166,7 @@ export default function Home(props: Item) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 8,
+      items: 7,
       slidesToSlide: 2, // optional, default to 1.
     },
     tablet: {
@@ -176,6 +179,16 @@ export default function Home(props: Item) {
       items: 2,
       slidesToSlide: 1, // optional, default to 1.
     },
+  };
+
+  const [selectedMovie, setSelectedMovie] = useState<Item | null>(null);
+
+  const handleOpenModal = (movie: Item) => {
+    setSelectedMovie(movie);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
   };
 
   return (
@@ -225,19 +238,22 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {popularMovies.map((movie) => (
-                  <Link
-                    href={`/description/${movie.id}`}
-                    className={styles.item_card}
-                    key={movie.id}
-                  >
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{movie.title}</h2>
+                  <Link href="#" className={styles.item_card} key={movie.id}>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(movie);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{movie.title}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
@@ -430,6 +446,14 @@ export default function Home(props: Item) {
             )}
           </div>
         </div>
+
+        {selectedMovie && (
+          <MovieModal
+            isOpen={!!selectedMovie}
+            onClose={handleCloseModal}
+            movieData={selectedMovie}
+          />
+        )}
       </main>
       <Footer />
     </>
