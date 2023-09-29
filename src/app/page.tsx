@@ -200,7 +200,22 @@ export default function Home(props: Item) {
 
   return (
     <>
-      <Header />
+      <Header
+        handleOpenModal={function (movie: {
+          id: number;
+          title: string;
+          name: string;
+          overview: string;
+          poster_path: string;
+          backdrop_path: string;
+          release_date: string;
+          vote_average: number;
+          vote_count: number;
+          genre_ids: number[];
+        }): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
 
       <main className={styles.main}>
         <div className={styles.main_container}>
@@ -283,7 +298,11 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {ratedMovies.map((movie) => (
-                  <Link href="#" className={styles.item_card} key={movie.id}>
+                  <Link
+                    href={`/movie/${movie.id}`}
+                    className={styles.item_card}
+                    key={movie.id}
+                  >
                     <Image
                       className={styles.item_img}
                       src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}

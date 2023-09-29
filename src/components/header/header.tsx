@@ -12,7 +12,24 @@ import {
 import styles from "../../../public/styles/header.module.css";
 import axios from "axios";
 
-export default function Header() {
+type Item = {
+  id: number;
+  title: string;
+  name: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  genre_ids: number[];
+};
+
+type Props = {
+  handleOpenModal: (movie: Item) => void;
+};
+
+export default function Header(handleOpenModal: Props) {
   // Récupération de la clé API
   const TMDB_API_KEY = process.env.API_KEY_TMDB;
 
@@ -93,7 +110,13 @@ export default function Header() {
                 | null
                 | undefined;
             }) => (
-              <div key={result.id}>
+              <div
+                key={result.id}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleOpenModal(result);
+                }}
+              >
                 <h3>{result.title}</h3>
               </div>
             )
