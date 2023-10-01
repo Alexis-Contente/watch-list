@@ -11,6 +11,7 @@ import {
 } from "react";
 import styles from "../../../public/styles/header.module.css";
 import axios from "axios";
+import Link from "next/link";
 
 type Item = {
   id: number;
@@ -117,7 +118,7 @@ export default function Header(handleOpenModal: Props) {
                   handleOpenModal(result);
                 }}
               >
-                <h3>{result.title}</h3>
+                <Link href={`/movie/${movie.id}`}>{result.title}</Link>
               </div>
             )
           )}
