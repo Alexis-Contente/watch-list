@@ -3,6 +3,9 @@
 import Header from "@/components/header/header";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styles from "../../../../public/styles/item.module.css";
+import Image from "next/image";
+import Footer from "@/components/footer/footer";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -67,11 +70,44 @@ export default function Item({
 
   return (
     <>
-      <Header />
-      <p>Movie/Série index: {id}</p>
-      <p>Titre: {item.title}</p>
-      <p>Adulte : {item.adult ? "Oui" : "Non"}</p>
-      <p>Budget : {item.budget}</p>
+      <Header
+        handleOpenModal={function (movie: {
+          id: number;
+          title: string;
+          name: string;
+          overview: string;
+          poster_path: string;
+          backdrop_path: string;
+          release_date: string;
+          vote_average: number;
+          vote_count: number;
+          genre_ids: number[];
+        }): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+      <div className={styles.item_container}>
+        <Image
+          className={styles.img}
+          src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item.poster_path}`}
+          alt="Photo de couverture d'un film ou série"
+          width={200}
+          height={300}
+        />
+        <div className={styles.informations}>
+          <p className={styles.title}>{item.title}</p>
+          <p className={styles.synopsis}>Synopsis: {item.overview}</p>
+          <p className={styles.release}>
+            <p className={styles.adult}>
+              Adulte : {item.adult ? "Oui" : "Non"}
+            </p>
+            <p className={styles.budget}>Budget : {item.budget}$</p>
+            Date de réalisation: {item.release_date}
+          </p>
+          <p className={styles.average}>Note: {item.vote_average}</p>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 }

@@ -317,14 +317,21 @@ export default function Home(props: Item) {
                     className={styles.item_card}
                     key={movie.id}
                   >
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{movie.title}</h2>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(movie);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{movie.title}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
@@ -348,14 +355,21 @@ export default function Home(props: Item) {
               >
                 {nowPlayingMovies.map((movie) => (
                   <Link href="#" className={styles.item_card} key={movie.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{movie.title}</h2>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(movie);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{movie.title}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
@@ -379,14 +393,21 @@ export default function Home(props: Item) {
               >
                 {upcomingMovies.map((movie) => (
                   <Link href="#" className={styles.item_card} key={movie.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{movie.title}</h2>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(movie);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{movie.title}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
@@ -410,14 +431,21 @@ export default function Home(props: Item) {
               >
                 {popularTvShow.map((tvShow) => (
                   <Link href="#" className={styles.item_card} key={tvShow.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(tvShow);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{tvShow.name}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
@@ -441,14 +469,21 @@ export default function Home(props: Item) {
               >
                 {ratedTvShow.map((tvShow) => (
                   <Link href="#" className={styles.item_card} key={tvShow.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(tvShow);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{tvShow.name}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
@@ -472,14 +507,21 @@ export default function Home(props: Item) {
               >
                 {onTheAirTvShow.map((tvShow) => (
                   <Link href="#" className={styles.item_card} key={tvShow.id}>
-                    <Image
-                      className={styles.item_img}
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
-                      alt="Photo de couverture d'un film ou série"
-                      width={200}
-                      height={300}
-                    />
-                    <h2 className={styles.item_title}>{tvShow.name}</h2>
+                    <div
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleOpenModal(tvShow);
+                      }}
+                    >
+                      <Image
+                        className={styles.item_img}
+                        src={`https://image.tmdb.org/t/p/w220_and_h330_face/${tvShow.poster_path}`}
+                        alt="Photo de couverture d'un film ou série"
+                        width={200}
+                        height={300}
+                      />
+                      <h2 className={styles.item_title}>{tvShow.name}</h2>
+                    </div>
                   </Link>
                 ))}
               </Carousel>
