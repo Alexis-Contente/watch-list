@@ -46,6 +46,7 @@
   padding: 10px 5px;
   border-radius: 5px;
   border: 2px solid #ffc857;
+  margin-right: 20px;
 }
 
 .search_box:focus {
@@ -71,6 +72,16 @@
   border-radius: 5px;
   position: fixed;
   top: 70px;
-  right: 110px;
-  padding: 0 10px;
+  right: 20px;
+}
+
+.result {
+  text-decoration: none;
+  list-style: none;
+  color: #000000;
+}
+
+.result:hover {
+  background-color: #ffc857;
+  cursor: pointer;
 }

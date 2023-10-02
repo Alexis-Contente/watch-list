@@ -1,8 +1,6 @@
 import Image from "next/image";
 import styles from "../../../public/styles/moviemodal.module.css";
 
-// components/MovieModal.tsx
-
 type Item = {
   id: number;
   title: string;
@@ -18,17 +16,21 @@ type Item = {
 
 type ModalProps = {
   isOpen: boolean;
-  onClose: () => void;
-  movieData: Item; // Assurez-vous que Item est importé ou défini ici
+  handleCloseModal: () => void;
+  movieData: Item;
 };
 
-const MovieModal: React.FC<ModalProps> = ({ isOpen, onClose, movieData }) => {
+const MovieModal: React.FC<ModalProps> = ({
+  isOpen,
+  handleCloseModal,
+  movieData,
+}) => {
   if (!isOpen) return null;
 
   return (
     <div className={styles.modal_container}>
       <div className={styles.modal_content}>
-        <span className={styles.close} onClick={onClose}>
+        <span className={styles.close} onClick={handleCloseModal}>
           &times;
         </span>
         <div className={styles.box_informations}>
@@ -48,7 +50,7 @@ const MovieModal: React.FC<ModalProps> = ({ isOpen, onClose, movieData }) => {
                 alt="Icône d'une étoile"
                 width={15}
                 height={15}
-              />
+              />{" "}
               {movieData.vote_average}
             </p>
           </div>

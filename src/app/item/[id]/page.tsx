@@ -56,7 +56,7 @@ export default function Item({
       )
       .then((response) => {
         const data = response.data;
-        setItem(data);
+        setItem(data) as unknown as Item[];
         console.log(data);
       })
       .catch((error) => {
@@ -96,15 +96,14 @@ export default function Item({
         />
         <div className={styles.informations}>
           <p className={styles.title}>{item.title}</p>
-          <p className={styles.synopsis}>Synopsis: {item.overview}</p>
+          <p className={styles.synopsis}>{item.overview}</p>
           <p className={styles.release}>
-            <p className={styles.adult}>
-              Adulte : {item.adult ? "Oui" : "Non"}
-            </p>
-            <p className={styles.budget}>Budget : {item.budget}$</p>
             Date de réalisation: {item.release_date}
           </p>
-          <p className={styles.average}>Note: {item.vote_average}</p>
+          <p className={styles.adult}>Adulte : {item.adult ? "Oui" : "Non"}</p>
+          <p className={styles.budget}>Budget : {item.budget}$</p>
+
+          <p className={styles.average}>Note: {item.vote_average}/10</p>
         </div>
       </div>
       <Footer />

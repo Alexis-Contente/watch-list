@@ -8,9 +8,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Loader from "@/components/loader/loader";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -203,6 +203,7 @@ export default function Home(props: Item) {
       <Header handleOpenModal={handleOpenModal} />
 
       <main className={styles.main}>
+        {/* HOME NOT LOGGED */}
         <div className={styles.home}>
           <div className={styles.form_container}>
             <form className={styles.form_signin}>
@@ -241,8 +242,8 @@ export default function Home(props: Item) {
           <div className={styles.main_container}>
             <h1 className={styles.title}>Bienvenue les watchers</h1>
             <p className={styles.text}>
-              Ici vous pourrez parcourir un catalogue de films et séries mis à
-              jour réguilèrement.
+              Ici vous pourrez parcourir un large catalogue de films et séries
+              mis à jour réguilèrement.
             </p>
             <p className={styles.text}>
               Vous avez la possibilité d&apos;ajouter des films et séries parmis
@@ -257,10 +258,11 @@ export default function Home(props: Item) {
             </p>
           </div>
         </div>
+        {/* HOME LOGGED */}
         <div className={styles.catalogue_container}>
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Films populaires</h2>
-            {isLoading1 && <p>Chargement...</p>}
+            {isLoading1 && <Loader />}
             {popularMovies && (
               <Carousel
                 className={styles.carousel}
@@ -298,7 +300,7 @@ export default function Home(props: Item) {
 
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Films les mieux notés</h2>
-            {isLoading2 && <p>Chargement...</p>}
+            {isLoading2 && <Loader />}
             {ratedMovies && (
               <Carousel
                 className={styles.carousel}
@@ -336,7 +338,7 @@ export default function Home(props: Item) {
 
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Films au cinéma</h2>
-            {isLoading5 && <p>Chargement...</p>}
+            {isLoading5 && <Loader />}
             {nowPlayingMovies && (
               <Carousel
                 className={styles.carousel}
@@ -374,7 +376,7 @@ export default function Home(props: Item) {
 
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Films à venir</h2>
-            {isLoading6 && <p>Chargement...</p>}
+            {isLoading6 && <Loader />}
             {upcomingMovies && (
               <Carousel
                 className={styles.carousel}
@@ -412,7 +414,7 @@ export default function Home(props: Item) {
 
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Séries populaires</h2>
-            {isLoading3 && <p>Chargement...</p>}
+            {isLoading3 && <Loader />}
             {popularTvShow && (
               <Carousel
                 className={styles.carousel}
@@ -450,7 +452,7 @@ export default function Home(props: Item) {
 
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Séries les mieux notées</h2>
-            {isLoading4 && <p>Chargement...</p>}
+            {isLoading4 && <Loader />}
             {ratedTvShow && (
               <Carousel
                 className={styles.carousel}
@@ -488,7 +490,7 @@ export default function Home(props: Item) {
 
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Séries en diffusion</h2>
-            {isLoading7 && <p>Chargement...</p>}
+            {isLoading7 && <Loader />}
             {onTheAirTvShow && (
               <Carousel
                 className={styles.carousel}
@@ -528,7 +530,7 @@ export default function Home(props: Item) {
         {selectedMovie && (
           <MovieModal
             isOpen={!!selectedMovie}
-            onClose={handleCloseModal}
+            handleCloseModal={handleCloseModal}
             movieData={selectedMovie}
           />
         )}

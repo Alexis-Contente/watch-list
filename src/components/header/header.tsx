@@ -93,7 +93,7 @@ export default function Header({ handleOpenModal }: Props) {
           onChange={handleSearchChange}
         />
 
-        <button className={styles.search_button}>Rechercher</button>
+        {/* <button className={styles.search_button}>Rechercher</button> */}
       </div>
       <div className={styles.search_results}>
         {searchResults &&
@@ -111,8 +111,10 @@ export default function Header({ handleOpenModal }: Props) {
                 | null
                 | undefined;
             }) => (
-              <div key={result.id}>
-                <Link href={`/item/${result.id}`}>{result.title}</Link>
+              <div className={styles.div_result} key={result.id}>
+                <Link className={styles.result} href={`/item/${result.id}`}>
+                  {result.title}
+                </Link>
               </div>
             )
           )}
