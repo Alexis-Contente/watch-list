@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Skranji&display=swap");
 
 .header {
-  background-color: #3d3d3d;
+  background-color: #000000;
   width: 100wh;
   height: 100px;
   display: flex;
@@ -32,7 +32,7 @@
 }
 
 .link:hover {
-  color: #74ff00;
+  color: #ffc857;
   cursor: pointer;
 }
 
@@ -45,7 +45,7 @@
 .search_box {
   padding: 10px 5px;
   border-radius: 5px;
-  border: 2px solid #74ff00;
+  border: 2px solid #ffc857;
 }
 
 .search_box:focus {
@@ -57,12 +57,12 @@
   margin-left: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #74ff00;
+  background-color: #ffffff;
   color: #3d3d3d;
 }
 
 .search_button:hover {
-  background-color: #51b100;
+  background-color: #ffc857;
   cursor: pointer;
 }
 
