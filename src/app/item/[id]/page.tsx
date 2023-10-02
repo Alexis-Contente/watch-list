@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import styles from "../../../../public/styles/item.module.css";
 import Image from "next/image";
 import Footer from "@/components/footer/footer";
+import Loader from "@/components/loader/loader";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -46,27 +47,27 @@ export default function Item({
     },
   };
 
+  const [isLoading, setIsLoading] = useState(true);
   const [item, setItem] = useState<Item[]>([]);
 
-  const getItems = async () => {
-    axios
-      .get(
-        `${TMDB_API_URL}movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`,
-        options
-      )
-      .then((response) => {
-        const data = response.data;
-        setItem(data) as unknown as Item[];
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
+    const getItems = async () => {
+      try {
+        const response = await axios.get(
+          `${TMDB_API_URL}movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`,
+          options
+        );
+        const data = response.data;
+        setItem(data);
+        setIsLoading(false); // Mettez à jour l'état après avoir chargé les données
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false); // Gérez l'erreur en mettant isLoading à false
+      }
+    };
+
     getItems();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -86,26 +87,33 @@ export default function Item({
           throw new Error("Function not implemented.");
         }}
       />
-      <div className={styles.item_container}>
-        <Image
-          className={styles.img}
-          src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item.poster_path}`}
-          alt="Photo de couverture d'un film ou série"
-          width={200}
-          height={300}
-        />
-        <div className={styles.informations}>
-          <p className={styles.title}>{item.title}</p>
-          <p className={styles.synopsis}>{item.overview}</p>
-          <p className={styles.release}>
-            Date de réalisation: {item.release_date}
-          </p>
-          <p className={styles.adult}>Adulte : {item.adult ? "Oui" : "Non"}</p>
-          <p className={styles.budget}>Budget : {item.budget}$</p>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.item_container}>
+          <Image
+            className={styles.img}
+            src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item.poster_path}`}
+            alt="Photo de couverture d'un film ou série"
+            width={200}
+            height={300}
+            loading="lazy"
+          />
+          <div className={styles.informations}>
+            <p className={styles.title}>{item.title}</p>
+            <p className={styles.synopsis}>{item.overview}</p>
+            <p className={styles.release}>
+              Date de réalisation: {item.release_date}
+            </p>
+            <p className={styles.adult}>
+              Adulte : {item.adult ? "Oui" : "Non"}
+            </p>
+            <p className={styles.budget}>Budget : {item.budget}$</p>
 
-          <p className={styles.average}>Note: {item.vote_average}/10</p>
+            <p className={styles.average}>Note: {item.vote_average}/10</p>
+          </div>
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );
