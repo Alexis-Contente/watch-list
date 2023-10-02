@@ -30,7 +30,7 @@ type Props = {
   handleOpenModal: (movie: Item) => void;
 };
 
-export default function Header(handleOpenModal: Props) {
+export default function Header({ handleOpenModal }: Props) {
   // Récupération de la clé API
   const TMDB_API_KEY = process.env.API_KEY_TMDB;
 
@@ -111,14 +111,8 @@ export default function Header(handleOpenModal: Props) {
                 | null
                 | undefined;
             }) => (
-              <div
-                key={result.id}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleOpenModal(result);
-                }}
-              >
-                <Link href={`/movie/${movie.id}`}>{result.title}</Link>
+              <div key={result.id}>
+                <Link href={`/item/${result.id}`}>{result.title}</Link>
               </div>
             )
           )}
