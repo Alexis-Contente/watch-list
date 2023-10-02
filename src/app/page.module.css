@@ -100,7 +100,7 @@
 
 .categorie_container {
   width: 100%;
-  margin: 100px 15px;
+  margin: 100px 0;
 }
 
 .title_categorie {
@@ -110,6 +110,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
+  color: #ffc857;
 }
 
 .carousel {
@@ -125,7 +126,7 @@
 }
 
 .item_card:hover {
-  transform: scale(1.8);
+  transform: scale(1.1);
 }
 
 .item_img {
@@ -137,4 +138,20 @@
   text-align: center;
   display: flex;
   justify-content: center;
+}
+
+/* custom-carousel.css */
+.carousel-container {
+  width: 80%;
+  margin: auto;
+}
+
+.carousel-arrow {
+  background-color: #333;
+  color: #fff;
+  font-size: 20px;
+}
+
+.carousel-arrow:hover {
+  background-color: #555;
 }

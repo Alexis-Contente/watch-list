@@ -234,7 +234,7 @@ export default function Home(props: Item) {
                 Se connecter
               </button>
               <p>
-                Pas de compte ? <a href="/connexion">Créer un compte</a>
+                Pas de compte ? <a href="/inscription">Créer un compte</a>
               </p>
             </form>
           </div>
@@ -274,7 +274,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {popularMovies.map((movie) => (
-                  <Link href="#" className={styles.item_card} key={movie.id}>
+                  <div className={styles.item_card} key={movie.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -290,7 +290,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{movie.title}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
@@ -312,11 +312,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {ratedMovies.map((movie) => (
-                  <Link
-                    href={`/item/${movie.id}`}
-                    className={styles.item_card}
-                    key={movie.id}
-                  >
+                  <div className={styles.item_card} key={movie.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -332,7 +328,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{movie.title}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
@@ -354,7 +350,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {nowPlayingMovies.map((movie) => (
-                  <Link href="#" className={styles.item_card} key={movie.id}>
+                  <div className={styles.item_card} key={movie.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -370,7 +366,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{movie.title}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
@@ -392,7 +388,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {upcomingMovies.map((movie) => (
-                  <Link href="#" className={styles.item_card} key={movie.id}>
+                  <div className={styles.item_card} key={movie.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -408,7 +404,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{movie.title}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
@@ -430,7 +426,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {popularTvShow.map((tvShow) => (
-                  <Link href="#" className={styles.item_card} key={tvShow.id}>
+                  <div className={styles.item_card} key={tvShow.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -446,7 +442,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{tvShow.name}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
@@ -468,7 +464,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {ratedTvShow.map((tvShow) => (
-                  <Link href="#" className={styles.item_card} key={tvShow.id}>
+                  <div className={styles.item_card} key={tvShow.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -484,7 +480,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{tvShow.name}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
@@ -506,7 +502,7 @@ export default function Home(props: Item) {
                 ssr={true}
               >
                 {onTheAirTvShow.map((tvShow) => (
-                  <Link href="#" className={styles.item_card} key={tvShow.id}>
+                  <div className={styles.item_card} key={tvShow.id}>
                     <div
                       onClick={(e) => {
                         e.preventDefault();
@@ -522,7 +518,7 @@ export default function Home(props: Item) {
                       />
                       <h2 className={styles.item_title}>{tvShow.name}</h2>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </Carousel>
             )}
