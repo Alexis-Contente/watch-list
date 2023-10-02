@@ -5,10 +5,10 @@ import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import MovieModal from "@/components/modal/movieModal";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -46,6 +46,7 @@ export default function Home(props: Item) {
   // Récupération de l'url de l'API
   const TMDB_API_URL = "https://api.themoviedb.org/3/";
 
+  // Jeton d'authentification
   const options = {
     method: "GET",
     headers: {
@@ -55,6 +56,7 @@ export default function Home(props: Item) {
     },
   };
 
+  // Requête pour récupérer les films populaires
   const {
     data: popularMovies,
     isLoading: isLoading1,
@@ -69,8 +71,8 @@ export default function Home(props: Item) {
         )
         .then((response) => response.data.results as Item[]),
   });
-  console.log("popularMovies", popularMovies);
 
+  // Requête pour récupérer les films les mieux notés
   const {
     data: ratedMovies,
     isLoading: isLoading2,
@@ -86,6 +88,7 @@ export default function Home(props: Item) {
         .then((response) => response.data.results as Item[]),
   });
 
+  // Requête pour récupérer les séries populaires
   const {
     data: popularTvShow,
     isLoading: isLoading3,
@@ -101,6 +104,7 @@ export default function Home(props: Item) {
         .then((response) => response.data.results as Item[]),
   });
 
+  // Requête pour récupérer les séries les mieux notées
   const {
     data: ratedTvShow,
     isLoading: isLoading4,
@@ -116,6 +120,7 @@ export default function Home(props: Item) {
         .then((response) => response.data.results as Item[]),
   });
 
+  // Requête pour récupérer les films en diffusion
   const {
     data: nowPlayingMovies,
     isLoading: isLoading5,
@@ -131,6 +136,7 @@ export default function Home(props: Item) {
         .then((response) => response.data.results as Item[]),
   });
 
+  // Requête pour récupérer les films à venir
   const {
     data: upcomingMovies,
     isLoading: isLoading6,
@@ -146,6 +152,7 @@ export default function Home(props: Item) {
         .then((response) => response.data.results as Item[]),
   });
 
+  // Requête pour récupérer les séries en diffusion
   const {
     data: onTheAirTvShow,
     isLoading: isLoading7,
@@ -161,8 +168,7 @@ export default function Home(props: Item) {
         .then((response) => response.data.results as Item[]),
   });
 
-  // console.log("data", data);
-
+  // Breakpoints pour le carousel
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -181,6 +187,7 @@ export default function Home(props: Item) {
     },
   };
 
+  // Affichage du modal
   const [selectedMovie, setSelectedMovie] = useState<Item | null>(null);
 
   const handleOpenModal = (movie: Item) => {
@@ -193,7 +200,22 @@ export default function Home(props: Item) {
 
   return (
     <>
-      <Header />
+      <Header
+        handleOpenModal={function (movie: {
+          id: number;
+          title: string;
+          name: string;
+          overview: string;
+          poster_path: string;
+          backdrop_path: string;
+          release_date: string;
+          vote_average: number;
+          vote_count: number;
+          genre_ids: number[];
+        }): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
 
       <main className={styles.main}>
         <div className={styles.main_container}>
