@@ -1,5 +1,8 @@
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -33,6 +36,37 @@ export const authOptions: NextAuthOptions = {
         account,
         profile,
       });
+
+      // Vérif user exist
+      const userExist = await prisma.user.findFirst({
+        where: {
+          email: user.email as string,
+        },
+      });
+
+      // If exist, update user
+      if (userExist) {
+        await prisma.user.update({
+          where: {
+            id: userExist.id,
+          },
+          data: {
+            email: user.email as string,
+            name: user.name as string,
+            image: user.image as string,
+          },
+        });
+      } else {
+        // If not exist, create user
+        await prisma.user.create({
+          data: {
+            id: user.id as string,
+            email: user.email as string,
+            name: user.name as string,
+            image: user.image as string,
+          },
+        });
+      }
 
       return true;
     },
