@@ -7,6 +7,8 @@ import styles from "../../../../public/styles/item.module.css";
 import Image from "next/image";
 import Footer from "@/components/footer/footer";
 import Loader from "@/components/loader/loader";
+import { useQuery } from "@tanstack/react-query";
+import { error } from "console";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -21,6 +23,7 @@ type Item = {
   vote_count: number;
   genre_ids: number[];
   budget: number;
+  adult: boolean;
 };
 
 export default function Item({
@@ -47,27 +50,44 @@ export default function Item({
     },
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [item, setItem] = useState<Item[]>([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [item, setItem] = useState<Item | null>(null);
 
-  useEffect(() => {
-    const getItems = async () => {
-      try {
-        const response = await axios.get(
+  // useEffect(() => {
+  //   const getItems = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${TMDB_API_URL}movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`,
+  //         options
+  //       );
+  //       const data = response.data;
+  //       setItem(data);
+  //       setIsLoading(false); // Mettez à jour l'état après avoir chargé les données
+  //     } catch (error) {
+  //       console.log(error);
+  //       setIsLoading(false); // Gérez l'erreur en mettant isLoading à false
+  //     }
+  //   };
+
+  //   getItems();
+  // }, [id]);
+
+  const {
+    data: item,
+    isLoading: isLoading,
+    isError: isError,
+  } = useQuery({
+    queryKey: ["item", id],
+    queryFn: () =>
+      axios
+        .get(
           `${TMDB_API_URL}movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`,
           options
-        );
-        const data = response.data;
-        setItem(data);
-        setIsLoading(false); // Mettez à jour l'état après avoir chargé les données
-      } catch (error) {
-        console.log(error);
-        setIsLoading(false); // Gérez l'erreur en mettant isLoading à false
-      }
-    };
-
-    getItems();
-  }, [id]);
+        )
+        .then((response) => response.data as Item),
+  });
+  console.log(item);
+  console.log(isError);
 
   return (
     <>
@@ -93,24 +113,24 @@ export default function Item({
         <div className={styles.item_container}>
           <Image
             className={styles.img}
-            src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item?.poster_path}`}
             alt="Photo de couverture d'un film ou série"
             width={200}
             height={300}
             loading="lazy"
           />
           <div className={styles.informations}>
-            <p className={styles.title}>{item.title}</p>
-            <p className={styles.synopsis}>{item.overview}</p>
+            <p className={styles.title}>{item?.title}</p>
+            <p className={styles.synopsis}>{item?.overview}</p>
             <p className={styles.release}>
-              Date de réalisation: {item.release_date}
+              Date de réalisation: {item?.release_date}
             </p>
             <p className={styles.adult}>
-              Adulte : {item.adult ? "Oui" : "Non"}
+              Adulte : {item?.adult ? "Oui" : "Non"}
             </p>
-            <p className={styles.budget}>Budget : {item.budget}$</p>
+            <p className={styles.budget}>Budget : {item?.budget}$</p>
 
-            <p className={styles.average}>Note: {item.vote_average}/10</p>
+            <p className={styles.average}>Note: {item?.vote_average}/10</p>
           </div>
         </div>
       )}
