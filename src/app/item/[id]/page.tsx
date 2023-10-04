@@ -2,13 +2,11 @@
 
 import Header from "@/components/header/header";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import styles from "../../../../public/styles/item.module.css";
 import Image from "next/image";
 import Footer from "@/components/footer/footer";
 import Loader from "@/components/loader/loader";
 import { useQuery } from "@tanstack/react-query";
-import { error } from "console";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -49,28 +47,6 @@ export default function Item({
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZTliY2M4ZjgwYThjNWM0MmUwMmY4ZDc0Mzg1NzM5MyIsInN1YiI6IjY1MDgyNDg0M2NkMTJjMDBjYTU2NjA0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6JoagrEoOFINgAbx0j_MuIUzwHKWS6GwbWemJxu-hNY",
     },
   };
-
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [item, setItem] = useState<Item | null>(null);
-
-  // useEffect(() => {
-  //   const getItems = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${TMDB_API_URL}movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`,
-  //         options
-  //       );
-  //       const data = response.data;
-  //       setItem(data);
-  //       setIsLoading(false); // Mettez à jour l'état après avoir chargé les données
-  //     } catch (error) {
-  //       console.log(error);
-  //       setIsLoading(false); // Gérez l'erreur en mettant isLoading à false
-  //     }
-  //   };
-
-  //   getItems();
-  // }, [id]);
 
   const {
     data: item,
