@@ -3,6 +3,8 @@ import { Query, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { SessionProvider } from "next-auth/react";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -19,9 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={quicksand.className}>
-        <QueryClientProvider client={new QueryClient()}>
-          {children}
-        </QueryClientProvider>
+        <SessionProvider>
+          <QueryClientProvider client={new QueryClient()}>
+            {children}
+            <ReactQueryDevtools initialIsOpen />
+          </QueryClientProvider>
+        </SessionProvider>
       </body>
     </html>
   );

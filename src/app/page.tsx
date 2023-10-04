@@ -11,6 +11,7 @@ import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Loader from "@/components/loader/loader";
+import { signIn, useSession } from "next-auth/react";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -26,20 +27,9 @@ type Item = {
   genre_ids: number[];
 };
 
-export default function Home(props: Item) {
-  const {
-    id,
-    title,
-    name,
-    overview,
-    poster_path,
-    backdrop_path,
-    release_date,
-    vote_average,
-    vote_count,
-    genre_ids,
-  } = props;
-
+export default function Home() {
+  const { data: session } = useSession();
+  console.log(session);
   // Récupération de la clé API
   const TMDB_API_KEY = process.env.API_KEY_TMDB;
 
@@ -200,64 +190,11 @@ export default function Home(props: Item) {
 
   return (
     <>
-      <Header handleOpenModal={handleOpenModal} />
+      <Header />
 
       <main className={styles.main}>
         {/* HOME NOT LOGGED */}
-        <div className={styles.home}>
-          <div className={styles.form_container}>
-            <form className={styles.form_signin}>
-              <div className={styles.input_container}>
-                <label className={styles.label} htmlFor="email">
-                  Adresse e-mail
-                </label>
-                <input
-                  className={styles.input}
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                />
-              </div>
-              <div className={styles.input_container}>
-                <label className={styles.label} htmlFor="password">
-                  Mot de passe
-                </label>
-                <input
-                  className={styles.input}
-                  type="password"
-                  id="password"
-                  name="password"
-                  required
-                />
-              </div>
-              <button className={styles.btn} type="submit">
-                Se connecter
-              </button>
-              <p>
-                Pas de compte ? <a href="/inscription">Créer un compte</a>
-              </p>
-            </form>
-          </div>
-          <div className={styles.main_container}>
-            <h1 className={styles.title}>Bienvenue les watchers</h1>
-            <p className={styles.text}>
-              Ici vous pourrez parcourir un large catalogue de films et séries
-              mis à jour réguilèrement.
-            </p>
-            <p className={styles.text}>
-              Vous avez la possibilité d&apos;ajouter des films et séries parmis
-              des listes pour avoir un suivi continu sur votre avancement de
-              visionnage.
-            </p>
-            <p className={styles.text}>
-              Pas mal nan ? En plus c&apos;est gratuit !
-            </p>
-            <p className={styles.text}>
-              Il vous suffit de vous connectez ou de créer un compte.
-            </p>
-          </div>
-        </div>
+
         {/* HOME LOGGED */}
         <div className={styles.catalogue_container}>
           <div className={styles.categorie_container}>

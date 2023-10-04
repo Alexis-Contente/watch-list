@@ -1,36 +1,13 @@
 "use client";
 
-import {
-  JSXElementConstructor,
-  Key,
-  PromiseLikeOfReactNode,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  useState,
-} from "react";
+import { useState } from "react";
 import styles from "../../../public/styles/header.module.css";
 import axios from "axios";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
 
-type Item = {
-  id: number;
-  title: string;
-  name: string;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
-  genre_ids: number[];
-};
-
-type Props = {
-  handleOpenModal: (movie: Item) => void;
-};
-
-export default function Header({ handleOpenModal }: Props) {
+export default function Header() {
   // Récupération de la clé API
   const TMDB_API_KEY = process.env.API_KEY_TMDB;
 
@@ -48,31 +25,31 @@ export default function Header({ handleOpenModal }: Props) {
   };
 
   // Gestion de la barre de recherche
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(null);
 
-  const searchItem = async (query: any) => {
-    try {
-      const response = await axios.get(
-        `${TMDB_API_URL}search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${query}&page=1&include_adult=false`,
-        options
-      );
-      return response.data.results;
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { data: searchResults, isError: isError } = useQuery({
+    queryKey: ["searchResults", searchTerm],
+    queryFn: () =>
+      axios
+        .get(
+          `${TMDB_API_URL}search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${searchTerm}&page=1&include_adult=false`,
+          options
+        )
+        .then((response) => response.data.results),
+    enabled: !!searchTerm,
+  });
+  console.log(searchResults);
+  console.log(isError);
 
   const handleSearchChange = async (e: { target: { value: any } }) => {
     const query = e.target.value;
     setSearchTerm(query);
-    const results = await searchItem(query);
-    setSearchResults(results);
   };
 
   return (
     <div className={styles.header}>
       <h1 className={styles.title}>Watch list</h1>
+      <button onClick={() => signOut()}>Sign Out</button>
       <nav className={styles.nav}>
         <a className={styles.link} href="/">
           Accueil
@@ -89,7 +66,7 @@ export default function Header({ handleOpenModal }: Props) {
           type="text"
           className={styles.search_box}
           placeholder="Rechercher..."
-          value={searchTerm}
+          value={searchTerm || ""}
           onChange={handleSearchChange}
         />
 
@@ -97,27 +74,13 @@ export default function Header({ handleOpenModal }: Props) {
       </div>
       <div className={styles.search_results}>
         {searchResults &&
-          searchResults.map(
-            (result: {
-              id: Key | null | undefined;
-              title:
-                | string
-                | number
-                | boolean
-                | ReactElement<any, string | JSXElementConstructor<any>>
-                | Iterable<ReactNode>
-                | ReactPortal
-                | PromiseLikeOfReactNode
-                | null
-                | undefined;
-            }) => (
-              <div className={styles.div_result} key={result.id}>
-                <Link className={styles.result} href={`/item/${result.id}`}>
-                  {result.title}
-                </Link>
-              </div>
-            )
-          )}
+          searchResults.map((result: { id: number; title: string }) => (
+            <div className={styles.div_result} key={result.id}>
+              <Link className={styles.result} href={`/item/${result.id}`}>
+                {result.title}
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );

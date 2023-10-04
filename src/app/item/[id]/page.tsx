@@ -67,22 +67,7 @@ export default function Item({
 
   return (
     <>
-      <Header
-        handleOpenModal={function (movie: {
-          id: number;
-          title: string;
-          name: string;
-          overview: string;
-          poster_path: string;
-          backdrop_path: string;
-          release_date: string;
-          vote_average: number;
-          vote_count: number;
-          genre_ids: number[];
-        }): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
+      <Header />
       {isLoading ? (
         <Loader />
       ) : (
