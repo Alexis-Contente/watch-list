@@ -1,9 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import styles from "../../../page.module.css";
-import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
+import styles from "../../../../../public/styles/signin.module.css";
 
 export default function Signin() {
   return (
@@ -38,9 +36,7 @@ export default function Signin() {
             <button className={styles.btn} type="submit">
               Se connecter
             </button>
-            <p>
-              Pas de compte ? <a href="/inscription">Créer un compte</a>
-            </p>
+            <p>OU</p>
             <button
               type="button"
               className={styles.btn_google}
@@ -48,6 +44,23 @@ export default function Signin() {
             >
               Sign in with Google
             </button>
+            <button
+              type="button"
+              className={styles.btn_github}
+              onClick={() => signIn("github")}
+            >
+              Sign in with GitHub
+            </button>
+            <button
+              type="button"
+              className={styles.btn_discord}
+              onClick={() => signIn("discord")}
+            >
+              Sign in with Discord
+            </button>
+            <p>
+              Pas de compte ? <a href="/inscription">Créer un compte</a>
+            </p>
           </form>
         </div>
         <div className={styles.main_container}>
@@ -69,7 +82,6 @@ export default function Signin() {
           </p>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

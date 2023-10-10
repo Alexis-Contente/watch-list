@@ -1,5 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+import DiscordProvider from "next-auth/providers/discord";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -20,8 +22,16 @@ export const authOptions: NextAuthOptions = {
           response_type: "code"
         }
       }
-    })
-  ],
+    }),
+      GitHubProvider({
+        clientId: process.env.GITHUB_ID || "",
+        clientSecret: process.env.GITHUB_SECRET || "",
+      }),
+      DiscordProvider({
+        clientId: process.env.DISCORD_CLIENT_ID || "",
+        clientSecret: process.env.DISCORD_CLIENT_SECRET || "",
+      }),
+    ],
   callbacks: {
     async session({ session, token }) {
       console.log("Session Callback", { session, token });
@@ -37,6 +47,7 @@ export const authOptions: NextAuthOptions = {
         profile,
       });
 
+      try {
       // Vérif user exist
       const userExist = await prisma.user.findFirst({
         where: {
@@ -67,6 +78,12 @@ export const authOptions: NextAuthOptions = {
           },
         });
       }
+    } catch (error) {
+      console.log(error);
+    return false;
+    } finally {
+      await prisma.$disconnect();
+    }
 
       return true;
     },
@@ -78,3 +95,4 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
+

@@ -11,7 +11,7 @@ import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Loader from "@/components/loader/loader";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 // Type de données attendu pour les films et séries
 type Item = {
