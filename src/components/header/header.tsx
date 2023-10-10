@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 export default function Header() {
   // Récupération de la clé API
@@ -49,7 +50,6 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <h1 className={styles.title}>Watch list</h1>
-      <button onClick={() => signOut()}>Sign Out</button>
       <nav className={styles.nav}>
         <a className={styles.link} href="/">
           Accueil
@@ -72,6 +72,14 @@ export default function Header() {
 
         {/* <button className={styles.search_button}>Rechercher</button> */}
       </div>
+      <Image
+        src="/assets/logos/disconnect.png"
+        alt="logout"
+        width={30}
+        height={30}
+        onClick={() => signOut()}
+        className={styles.disconnect}
+      />
       <div className={styles.search_results}>
         {searchResults &&
           searchResults.map((result: { id: number; title: string }) => (

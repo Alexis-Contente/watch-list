@@ -85,3 +85,8 @@
   background-color: #ffc857;
   cursor: pointer;
 }
+
+.disconnect {
+  margin-right: 20px;
+  cursor: pointer;
+}
