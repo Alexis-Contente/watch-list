@@ -1,8 +1,6 @@
 "use client";
 
-import Header from "@/components/header/header";
 import styles from "../../../public/styles/signup.module.css";
-import Footer from "@/components/footer/footer";
 import { useRef } from "react";
 import axios from "axios";
 

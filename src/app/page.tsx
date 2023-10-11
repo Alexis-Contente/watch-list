@@ -193,9 +193,6 @@ export default function Home() {
       <Header />
 
       <main className={styles.main}>
-        {/* HOME NOT LOGGED */}
-
-        {/* HOME LOGGED */}
         <div className={styles.catalogue_container}>
           <div className={styles.categorie_container}>
             <h2 className={styles.title_categorie}>Films populaires</h2>

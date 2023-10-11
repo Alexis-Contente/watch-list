@@ -59,7 +59,7 @@ export default function Signin() {
               Sign in with Discord
             </button>
             <p>
-              Pas de compte ? <a href="/inscription">Créer un compte</a>
+              Pas de compte ? <a href="/signup">Créer un compte</a>
             </p>
           </form>
         </div>

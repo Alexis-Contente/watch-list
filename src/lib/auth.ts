@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ user, account, profile }) {
-      console.log("GET /api/auth/session", "passla");
+      console.log("GET /api/auth/session");
 
       console.log("Sign In Callback", {
         user,
