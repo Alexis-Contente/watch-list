@@ -50,7 +50,7 @@ export default function Connexion() {
             </label>
             <input
               className={styles.input}
-              type="text"
+              type="name"
               id="name"
               name="name"
               required
