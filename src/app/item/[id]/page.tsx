@@ -65,6 +65,25 @@ export default function Item({
   console.log(item);
   console.log(isError);
 
+  const handleAddItem = (e: any) => {
+    e.preventDefault();
+    console.log("Add item");
+    axios
+      .post("/api/item", {
+        name: item?.name,
+        title: item?.title,
+        poster_path: item?.poster_path,
+        id: item?.id,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("Erreur lors de l'ajout de l'item");
+      });
+  };
+
   return (
     <>
       <Header />
@@ -90,8 +109,31 @@ export default function Item({
               Adulte : {item?.adult ? "Oui" : "Non"}
             </p>
             <p className={styles.budget}>Budget : {item?.budget}$</p>
-
             <p className={styles.average}>Note: {item?.vote_average}/10</p>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleAddItem}
+            >
+              <span className={styles.button__text}>Add Item</span>
+              <span className={styles.button__icon}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  stroke="currentColor"
+                  height="24"
+                  fill="none"
+                  className={styles.svg}
+                >
+                  <line y2="19" y1="5" x2="12" x1="12"></line>
+                  <line y2="12" y1="12" x2="19" x1="5"></line>
+                </svg>
+              </span>
+            </button>{" "}
           </div>
         </div>
       )}
