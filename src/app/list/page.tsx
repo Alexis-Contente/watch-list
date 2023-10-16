@@ -11,6 +11,7 @@ type Item = {
   id: number;
   name: string;
   title: string;
+  poster_path: string;
 };
 
 export default function List(item: Item) {
@@ -49,24 +50,31 @@ export default function List(item: Item) {
     <>
       <Header />
       <div className={styles.container}>
-        <h1 className={styles.title}>Liste d&apos;éléments</h1>
-        {items.map((item) => (
-          <div className={styles.item__card} key={item.id}>
-            <Image
-              src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item.poster_path}`}
-              alt={`Image de couverture de l'item ${item.name || item.title}`}
-              width={150}
-              height={200}
-            />
-            <h2>{item.name || item.title}</h2>
-            <button
-              className={styles.delete}
-              onClick={() => handleDeleteItem(item.id)}
-            >
-              DELETE
-            </button>
-          </div>
-        ))}
+        <h1 className={styles.title}>Votre liste de films et séries</h1>
+        {items.length > 0 ? (
+          items.map((item: Item) => (
+            <div className={styles.item__card} key={item.id}>
+              <Image
+                src={`https://image.tmdb.org/t/p/w220_and_h330_face/${item.poster_path}`}
+                alt={`Image de couverture de l'item ${item.name || item.title}`}
+                className={styles.item__poster}
+                width={150}
+                height={200}
+              />
+              <div className={styles.item__informations}>
+                <h2>{item.name || item.title}</h2>
+                <button
+                  className={styles.delete}
+                  onClick={() => handleDeleteItem(item.id)}
+                >
+                  DELETE
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className={styles.empty}>Votre liste est vide</p>
+        )}
       </div>
       <Footer />
     </>

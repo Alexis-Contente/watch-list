@@ -6,6 +6,9 @@
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .title {
@@ -21,7 +24,78 @@
 .item__card {
   width: 60%;
   display: flex;
+  align-items: center;
   background-color: #ffc857;
   margin-bottom: 15px;
   border-radius: 15px;
+}
+
+.item__informations {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px;
+  font-size: 1rem;
+}
+
+.empty {
+  color: #ffc857;
+}
+
+.delete {
+  height: 60px;
+  --color: #ff0000;
+  --color2: #ffc857;
+  padding: 0.8em 1.75em;
+  background-color: transparent;
+  border-radius: 6px;
+  border: 0.3px solid var(--color);
+  transition: 0.5s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  font-weight: 300;
+  font-size: 17px;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  text-transform: uppercase;
+  color: var(--color);
+}
+
+.delete::after,
+.delete::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: skew(90deg) translate(-50%, -50%);
+  position: absolute;
+  inset: 50%;
+  left: 25%;
+  z-index: -1;
+  transition: 0.5s ease-out;
+  background-color: var(--color);
+}
+
+.delete::before {
+  top: -50%;
+  left: -25%;
+  transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.delete:hover::before {
+  transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.delete:hover::after {
+  transform: skew(45deg) translate(-50%, -50%);
+}
+
+.delete:hover {
+  color: var(--color2);
+}
+
+.delete:active {
+  filter: brightness(0.7);
+  transform: scale(0.98);
 }
