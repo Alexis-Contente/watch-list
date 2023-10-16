@@ -3,6 +3,8 @@
 import styles from "../../../public/styles/list.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import Loader from "@/components/loader/loader";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -17,6 +19,7 @@ type Item = {
 export default function List(item: Item) {
   // Get item's user from database
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const itemsData = async () => {
     axios
@@ -27,12 +30,26 @@ export default function List(item: Item) {
       })
       .catch((error: any) => {
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   useEffect(() => {
     itemsData();
   }, []);
+
+  // const {
+  //   data: dataItem,
+  //   isLoading: isLoading,
+  //   isError: isError,
+  // } = useQuery({
+  //   queryKey: ["items"],
+  //   queryFn: () => {
+  //     axios.get("/api/item").then((response) => response.data as Item[]);
+  //   },
+  // });
 
   // Delete item from database
   const handleDeleteItem = async (id: number) => {
@@ -51,7 +68,9 @@ export default function List(item: Item) {
       <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>Votre liste de films et séries</h1>
-        {items.length > 0 ? (
+        {loading ? (
+          <Loader />
+        ) : items.length > 0 ? (
           items.map((item: Item) => (
             <div className={styles.item__card} key={item.id}>
               <Image
