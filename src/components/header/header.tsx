@@ -54,8 +54,8 @@ export default function Header() {
         <a className={styles.link} href="/">
           Accueil
         </a>
-        <a className={styles.link} href="#">
-          Mes listes
+        <a className={styles.link} href="/liste">
+          Ma liste
         </a>
         <a className={styles.link} href="#">
           Mon profil
