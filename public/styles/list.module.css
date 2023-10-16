@@ -1,0 +1,27 @@
+.container {
+  width: 80%;
+  background-color: #000000;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.title {
+  all: unset;
+  color: #ffc857;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  padding: 15px 0;
+}
+
+.item__card {
+  width: 60%;
+  display: flex;
+  background-color: #ffc857;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
