@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={quicksand.className}>
+      <body className={quicksand.className} suppressHydrationWarning={true}>
         <SessionProvider>
           <QueryClientProvider client={new QueryClient()}>
             {children}

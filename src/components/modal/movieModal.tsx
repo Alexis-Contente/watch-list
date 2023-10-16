@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "../../../public/styles/moviemodal.module.css";
+import axios from "axios";
 
 type Item = {
   id: number;
@@ -27,6 +28,25 @@ const MovieModal: React.FC<ModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
+  const handleAddItem = (e: any) => {
+    e.preventDefault();
+    console.log("Add item");
+    axios
+      .post("/api/item", {
+        name: movieData.name,
+        title: movieData.title,
+        poster_path: movieData.poster_path,
+        id: movieData.id,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("Erreur lors de l'ajout de l'item");
+      });
+  };
+
   return (
     <div className={styles.modal_container}>
       <div className={styles.modal_content}>
@@ -53,6 +73,30 @@ const MovieModal: React.FC<ModalProps> = ({
               />{" "}
               {movieData.vote_average}
             </p>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={handleAddItem}
+            >
+              <span className={styles.button__text}>Add Item</span>
+              <span className={styles.button__icon}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  stroke="currentColor"
+                  height="24"
+                  fill="none"
+                  className={styles.svg}
+                >
+                  <line y2="19" y1="5" x2="12" x1="12"></line>
+                  <line y2="12" y1="12" x2="19" x1="5"></line>
+                </svg>
+              </span>
+            </button>{" "}
           </div>
         </div>
       </div>
