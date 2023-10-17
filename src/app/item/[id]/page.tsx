@@ -48,6 +48,7 @@ export default function Item({
     },
   };
 
+  // Récupération des données du film ou de la série en fonction de l'id
   const {
     data: item,
     isLoading: isLoading,
@@ -62,8 +63,6 @@ export default function Item({
         )
         .then((response) => response.data as Item),
   });
-  console.log(item);
-  console.log(isError);
 
   const handleAddItem = (e: any) => {
     e.preventDefault();

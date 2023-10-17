@@ -4,7 +4,6 @@ import styles from "../../../public/styles/list.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Loader from "@/components/loader/loader";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,7 +26,7 @@ export default function List(item: Item) {
       .get("api/item")
       .then((response) => {
         setItems(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error: any) => {
         console.log(error);
@@ -40,17 +39,6 @@ export default function List(item: Item) {
   useEffect(() => {
     itemsData();
   }, []);
-
-  // const {
-  //   data: dataItem,
-  //   isLoading: isLoading,
-  //   isError: isError,
-  // } = useQuery({
-  //   queryKey: ["items"],
-  //   queryFn: () => {
-  //     axios.get("/api/item").then((response) => response.data as Item[]);
-  //   },
-  // });
 
   // Delete item from database
   const handleDeleteItem = async (id: number) => {

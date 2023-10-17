@@ -4,14 +4,14 @@ import styles from "./page.module.css";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import MovieModal from "@/components/modal/movieModal";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import Loader from "@/components/loader/loader";
 import axios from "axios";
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Loader from "@/components/loader/loader";
 import { useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -29,7 +29,8 @@ type Item = {
 
 export default function Home() {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
+
   // Récupération de la clé API
   const TMDB_API_KEY = process.env.API_KEY_TMDB;
 

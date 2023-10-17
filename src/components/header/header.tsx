@@ -39,8 +39,8 @@ export default function Header() {
         .then((response) => response.data.results),
     enabled: !!searchTerm,
   });
-  console.log(searchResults);
-  console.log(isError);
+  // console.log(searchResults);
+  // console.log(isError);
 
   const handleSearchChange = async (e: { target: { value: any } }) => {
     const query = e.target.value;
@@ -57,7 +57,7 @@ export default function Header() {
         <a className={styles.link} href="/list">
           Ma liste
         </a>
-        <a className={styles.link} href="#">
+        <a className={styles.link} href="/profil">
           Mon profil
         </a>
       </nav>

@@ -8,3 +8,9 @@ module.exports = {
     domains: ["image.tmdb.org"],
   },
 };
+
+module.exports = {
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
+};
