@@ -16,7 +16,7 @@ type Item = {
   overview: string;
   poster_path: string;
   backdrop_path: string;
-  release_date: string;
+  release_date: number;
   vote_average: number;
   vote_count: number;
   genre_ids: number[];
@@ -84,6 +84,23 @@ export default function Item({
       });
   };
 
+  const formatDate = (dateString: number) => {
+    const options = { year: "numeric", month: "numeric", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("fr-FR", options);
+  };
+
+  const formatBudget = (budget: number) => {
+    if (!budget) return "";
+    return budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  };
+
+  const roundToTenth = (average: number) => {
+    if (average !== null && average !== undefined) {
+      return parseFloat(average).toFixed(2);
+    }
+    return "";
+  };
+
   return (
     <>
       <Header />
@@ -103,13 +120,17 @@ export default function Item({
             <p className={styles.title}>{item?.title}</p>
             <p className={styles.synopsis}>{item?.overview}</p>
             <p className={styles.release}>
-              Date de réalisation: {item?.release_date}
+              Date de réalisation: {formatDate(item?.release_date)}
             </p>
             <p className={styles.adult}>
               Adulte : {item?.adult ? "Oui" : "Non"}
             </p>
-            <p className={styles.budget}>Budget : {item?.budget}$</p>
-            <p className={styles.average}>Note: {item?.vote_average}/10</p>
+            <p className={styles.budget}>
+              Budget : {formatBudget(item?.budget)} $
+            </p>
+            <p className={styles.average}>
+              Note: {roundToTenth(item?.vote_average)}/10
+            </p>
             <button
               type="button"
               className={styles.button}

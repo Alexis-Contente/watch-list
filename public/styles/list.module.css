@@ -33,9 +33,21 @@
 .item__informations {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin: 10px;
   font-size: 1rem;
+}
+
+.item__link {
+  text-decoration: none;
+  color: #000000;
+}
+
+.item__title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .empty {

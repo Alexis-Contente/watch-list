@@ -7,6 +7,7 @@ import Loader from "@/components/loader/loader";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type Item = {
@@ -81,7 +82,11 @@ export default function List(item: Item) {
                 height={200}
               />
               <div className={styles.item__informations}>
-                <h2>{item.name || item.title}</h2>
+                <Link className={styles.item__link} href={`/item/${item.id}`}>
+                  <p className={styles.item__title}>
+                    {item.name || item.title}
+                  </p>
+                </Link>
                 <button
                   className={styles.delete}
                   onClick={() => handleDeleteItem(item.id)}
