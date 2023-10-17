@@ -22,64 +22,25 @@
   font-weight: bold;
 }
 
-.button {
-  position: relative;
-  width: 150px;
-  height: 40px;
+.btn {
+  display: inline-block;
+  outline: 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: 1px solid #ffb419;
-  background-color: #ffb419;
-  border-radius: 5px;
-}
-
-.button,
-.button__icon,
-.button__text {
-  transition: all 0.3s;
-}
-
-.button .button__text {
-  transform: translateX(30px);
-  color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  background: #000;
+  font-size: 15px;
   font-weight: 600;
+  line-height: 28px;
+  padding: 8px 20px;
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.button .button__icon {
-  position: absolute;
-  transform: translateX(95px);
-  height: 100%;
-  width: 39px;
-  background-color: #ffb419;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-}
-
-.button .svg {
-  width: 30px;
-  stroke: #ffffff;
-}
-
-.button:hover {
+.btn:hover {
+  color: #000;
   background: #ffb419;
-}
-
-.button:hover .button__text {
-  color: transparent;
-}
-
-.button:hover .button__icon {
-  width: 148px;
-  transform: translateX(0);
-}
-
-.button:active .button__icon {
-  background-color: #ffb419;
-}
-
-.button:active {
-  border: 1px solid #ffb419;
 }
