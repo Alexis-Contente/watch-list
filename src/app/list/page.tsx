@@ -8,6 +8,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 type Item = {
   id: number;
@@ -30,6 +31,7 @@ export default function List(item: Item) {
       })
       .catch((error: any) => {
         console.log(error);
+        toast.success("L'item a bien été supprimé");
       })
       .finally(() => {
         setLoading(false);

@@ -12,6 +12,8 @@ import "react-multi-carousel/lib/styles.css";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -192,7 +194,18 @@ export default function Home() {
   return (
     <>
       <Header />
-
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <main className={styles.main}>
         <div className={styles.catalogue_container}>
           <div className={styles.categorie_container}>

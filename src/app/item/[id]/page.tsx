@@ -16,7 +16,7 @@ type Item = {
   overview: string;
   poster_path: string;
   backdrop_path: string;
-  release_date: number;
+  release_date: string;
   vote_average: number;
   vote_count: number;
   genre_ids: number[];
@@ -83,9 +83,12 @@ export default function Item({
       });
   };
 
-  const formatDate = (dateString: number) => {
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("fr-FR", options);
+  const formatDate = (dateString: string) => {
+    const split = dateString.split("-");
+    const year = split[0];
+    const month = split[1];
+    const day = split[2];
+    return `${day}-${month}-${year}`;
   };
 
   const formatBudget = (budget: number) => {
@@ -95,7 +98,7 @@ export default function Item({
 
   const roundToTenth = (average: number) => {
     if (average !== null && average !== undefined) {
-      return parseFloat(average).toFixed(2);
+      return average.toFixed(2);
     }
     return "";
   };
@@ -118,18 +121,24 @@ export default function Item({
           <div className={styles.informations}>
             <p className={styles.title}>{item?.title}</p>
             <p className={styles.synopsis}>{item?.overview}</p>
-            <p className={styles.release}>
-              Date de réalisation: {formatDate(item?.release_date)}
-            </p>
+            {item?.release_date && (
+              <p className={styles.release}>
+                Date de réalisation: {formatDate(item?.release_date)}
+              </p>
+            )}
             <p className={styles.adult}>
               Adulte : {item?.adult ? "Oui" : "Non"}
             </p>
-            <p className={styles.budget}>
-              Budget : {formatBudget(item?.budget)} $
-            </p>
-            <p className={styles.average}>
-              Note: {roundToTenth(item?.vote_average)}/10
-            </p>
+            {item?.budget && (
+              <p className={styles.budget}>
+                Budget : {formatBudget(item?.budget)} $
+              </p>
+            )}
+            {item?.vote_average && (
+              <p className={styles.average}>
+                Note: {roundToTenth(item?.vote_average)}/10
+              </p>
+            )}
             <button
               type="button"
               className={styles.btn}
