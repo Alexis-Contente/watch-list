@@ -20,7 +20,13 @@ export default function Profil() {
   }, [session]);
 
   if (loading) {
-    return <Loader />;
+    return (
+      <>
+        <Header />
+        <Loader />
+        <Footer />
+      </>
+    );
   }
 
   return (
