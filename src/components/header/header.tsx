@@ -40,7 +40,7 @@ export default function Header() {
     enabled: !!searchTerm,
   });
   // console.log(searchResults);
-  // console.log(isError);
+  console.log(isError);
 
   const handleSearchChange = async (e: { target: { value: any } }) => {
     const query = e.target.value;
