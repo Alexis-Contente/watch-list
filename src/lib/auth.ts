@@ -33,10 +33,26 @@ export const authOptions: NextAuthOptions = {
       }),
     ],
   callbacks: {
+    async jwt({token, user, account}) {
+      console.log("jwt Callback", { token, user, account });
+
+      user && (token.user = user)
+      return token
+  },
     async session({ session, token }) {
       console.log("Session Callback", { session, token });
-
-      return session;
+      let userId: string | undefined;
+      if (token) {
+        userId = (token.user as any).id as string;
+      }
+      const newSession = {
+        ...session,
+        user: {
+          ...session.user,
+          id: userId,
+        },
+      };
+      return newSession;
     },
     async signIn({ user, account, profile }) {
       console.log("GET /api/auth/session");

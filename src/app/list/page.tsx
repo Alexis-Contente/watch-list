@@ -5,6 +5,7 @@ import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Loader from "@/components/loader/loader";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -18,13 +19,16 @@ type Item = {
 };
 
 export default function List() {
+  const { data: session } = useSession();
+  const userId = session?.session?.user?.id;
+  console.log(userId);
   // Get item's user from database
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const itemsData = async () => {
     axios
-      .get("api/item")
+      .get(`api/list/${userId}`)
       .then((response) => {
         setItems(response.data);
         // console.log(response.data);
@@ -39,8 +43,10 @@ export default function List() {
   };
 
   useEffect(() => {
-    itemsData();
-  }, []);
+    if (userId) {
+      itemsData();
+    }
+  }, [userId]);
 
   // Delete item from database
   const handleDeleteItem = async (id: number) => {

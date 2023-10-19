@@ -7,6 +7,7 @@ import Image from "next/image";
 import Footer from "@/components/footer/footer";
 import Loader from "@/components/loader/loader";
 import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 // Type de données attendu pour les films et séries
 type Item = {
@@ -32,6 +33,10 @@ export default function Item({
   };
 }) {
   const id = params.id;
+
+  const { data: session } = useSession();
+  console.log(session);
+  const userId = session?.session?.user?.id;
 
   // Récupération de la clé API
   const TMDB_API_KEY = process.env.API_KEY_TMDB;
@@ -67,12 +72,14 @@ export default function Item({
   const handleAddItem = (e: any) => {
     e.preventDefault();
     console.log("Add item");
+    console.log(userId);
     axios
       .post("/api/item", {
         name: item?.name,
         title: item?.title,
         poster_path: item?.poster_path,
         id: item?.id,
+        userId: userId,
       })
       .then((res) => {
         console.log(res);
