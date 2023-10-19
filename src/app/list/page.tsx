@@ -17,7 +17,7 @@ type Item = {
   poster_path: string;
 };
 
-export default function List(item: Item) {
+export default function List() {
   // Get item's user from database
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
