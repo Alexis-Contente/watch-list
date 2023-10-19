@@ -71,8 +71,9 @@
   background-color: #ffffff;
   border-radius: 5px;
   position: fixed;
+  z-index: 99;
   top: 70px;
-  right: 20px;
+  right: 70px;
 }
 
 .result {
