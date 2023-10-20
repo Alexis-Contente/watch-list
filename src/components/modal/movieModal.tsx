@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "../../../public/styles/moviemodal.module.css";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 type Item = {
   id: number;
@@ -21,22 +22,28 @@ type ModalProps = {
   movieData: Item;
 };
 
-const MovieModal: React.FC<ModalProps> = ({
+export default function MovieModal({
   isOpen,
   handleCloseModal,
   movieData,
-}) => {
-  if (!isOpen) return null;
+  params,
+}: ModalProps & { params: { id: string } }) {
+  const id = params?.id;
+  const { data: session } = useSession();
+  console.log(session);
+  const userId = session?.session?.user?.id;
 
   const handleAddItem = (e: any) => {
     e.preventDefault();
     console.log("Add item");
+    console.log(userId);
     axios
       .post("/api/item", {
-        name: movieData.name,
-        title: movieData.title,
-        poster_path: movieData.poster_path,
-        id: movieData.id,
+        name: movieData?.name,
+        title: movieData?.title,
+        poster_path: movieData?.poster_path,
+        id: movieData?.id,
+        userId: userId,
       })
       .then((res) => {
         console.log(res);
@@ -46,6 +53,8 @@ const MovieModal: React.FC<ModalProps> = ({
         console.log("Erreur lors de l'ajout de l'item");
       });
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className={styles.modal_container}>
@@ -102,6 +111,4 @@ const MovieModal: React.FC<ModalProps> = ({
       </div>
     </div>
   );
-};
-
-export default MovieModal;
+}
