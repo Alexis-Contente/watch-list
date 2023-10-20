@@ -8,7 +8,9 @@
   height: 50px;
   display: grid;
   animation: s4 4s infinite;
+  margin: 50px 0;
 }
+
 .loader_container::before,
 .loader_container::after {
   content: "";
@@ -19,6 +21,7 @@
   mix-blend-mode: darken;
   animation: s4 1s infinite linear;
 }
+
 .loader_container::after {
   border-color: #0000 #0000 #e4e4ed #e4e4ed;
   animation-direction: reverse;
