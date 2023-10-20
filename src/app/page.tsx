@@ -480,6 +480,9 @@ export default function Home() {
             isOpen={!!selectedMovie}
             handleCloseModal={handleCloseModal}
             movieData={selectedMovie}
+            params={{
+              id: "",
+            }}
           />
         )}
       </main>
