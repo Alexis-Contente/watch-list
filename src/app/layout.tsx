@@ -1,12 +1,11 @@
 "use client";
-import { Query, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
-import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SessionProvider } from "next-auth/react";
 
-const quicksand = Quicksand({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
 //   title: "Watch list",
@@ -20,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={quicksand.className} suppressHydrationWarning={true}>
+      <body className={montserrat.className} suppressHydrationWarning={true}>
         <SessionProvider>
           <QueryClientProvider client={new QueryClient()}>
             {children}
