@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📺 Watch List
 
-## Getting Started
+## 📍 Description
 
-First, run the development server:
+This app allows you to create and manage your own list of movies and TV shows. It features various categories, such as top-rated movies and TV series, for easy browsing. Each film or series comes with a detailed information sheet, providing insights and key details.
+
+## ⚡️ Features
+
+- Log in to your account via Google, GitHub, or Discord
+- Browse movie and series catalogs
+- Display the details of a movie or series
+- Search for a movie or series using the search bar
+- Add a movie or series to your list
+- View your list
+- Remove an item from your list
+- View your profile
+
+## 🛠 Tech Stack
+
+This project was built using a modern and efficient tech stack to ensure an optimal user experience and agile development. Here are the key technologies used:
+
+**React**: A JavaScript library for building interactive and dynamic user interfaces.
+
+**Next.js**: A React framework enabling server-side rendering for optimal performance and better SEO.
+
+**TypeScript**: A typed superset of JavaScript, used to enhance code readability and reduce potential errors.
+
+**Prisma**: An ORM (Object-Relational Mapping) for managing the database in an intuitive and secure way, ensuring better code maintenance and scalability.
+
+**Axios**: A promise-based HTTP client for making HTTP requests, used to communicate with external APIs.
+
+**React-multi-carousel**: A flexible and responsive React library for creating attractive and functional carousels, enhancing the user interface's interactivity.
+
+Each technology was chosen for its specific performance features and contribution to creating a smooth and responsive user experience.
+
+## 🚀 Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone git@github.com:Alexis-Contente/watch-list.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd "project-clone"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+  npm run dev
+```
